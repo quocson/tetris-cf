@@ -5,18 +5,20 @@ using System.Text;
 
 namespace Tetris_Windows_Mobile
 {
-    class MapManager
+    class Map
     {
-        public static int[,] map;
         public static int xMax, yMax;
-        public static int timeDelay;
+        public static int[,] map;
+        public static int startXscreen;
+        public static int dyFallDown;
 
-        static MapManager()
+        static Map()
         {
-            timeDelay = 50;
             xMax = 17;
             yMax = 12;
-            map = new int[xMax, yMax];         
+            map = new int[xMax, yMax];
+            startXscreen = 70;
+            dyFallDown = 14;
         }
 
         public static bool onMap(int r,int c)
@@ -24,7 +26,7 @@ namespace Tetris_Windows_Mobile
             return (r >= 0 && r < xMax && c >= 0 && c < yMax);
         }
 
-        /*public static int randShape(out int color,out int rotate)
+        public static int randShape(out int color,out int rotate)
         {
             Random rd = new Random(unchecked((int)DateTime.Now.Ticks));
             int index = rd.Next(0,7);
@@ -43,7 +45,7 @@ namespace Tetris_Windows_Mobile
                 case 6: index = 60; break;
             }
             return index;
-        }*/
+        }
 
         public static void updateMap(int rol,ref int dxLine)
         {
