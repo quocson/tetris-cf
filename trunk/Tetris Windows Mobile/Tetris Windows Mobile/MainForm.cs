@@ -16,12 +16,11 @@ namespace Tetris_Windows_Mobile
         private int level;
         private int line;
         private int piece;
-        static private Bitmap imgBackLoad;
+        private bool enableSound;
+        private bool enableGhost;
+        private bool pause;
         private Bitmap backBuffer;
-        static MainForm()
-        {
-            imgBackLoad = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.background);
-        }
+
         public MainForm()
         {
 
@@ -103,8 +102,7 @@ namespace Tetris_Windows_Mobile
 
         private void MainForm_Paint(object sender, PaintEventArgs e)
         {
-            Graphics.FromImage(backBuffer).DrawImage(imgBackLoad,0,0);
-            e.Graphics.DrawImage(backBuffer, 0, 0);
+
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -120,6 +118,31 @@ namespace Tetris_Windows_Mobile
         private void menuItem5_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((e.KeyCode == System.Windows.Forms.Keys.Up))
+            {
+                // Up
+            }
+            if ((e.KeyCode == System.Windows.Forms.Keys.Down))
+            {
+                // Down
+            }
+            if ((e.KeyCode == System.Windows.Forms.Keys.Left))
+            {
+                // Left
+            }
+            if ((e.KeyCode == System.Windows.Forms.Keys.Right))
+            {
+                // Right
+            }
+            if ((e.KeyCode == System.Windows.Forms.Keys.Enter))
+            {
+                // Enter
+            }
+
         }
     }
 }

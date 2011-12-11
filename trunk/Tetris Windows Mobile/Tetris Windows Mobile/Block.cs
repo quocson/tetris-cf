@@ -51,33 +51,33 @@ namespace Tetris_Windows_Mobile
 
         public Point positionArr()
         {
-            return new Point(yScreen / 13, xScreen / 13);
+            return new Point(yScreen / 14, xScreen / 14);
         }
 
-        /*public void lockedArr()
+        public void lockedArr()
         {
-            int i = yScreen / 13;
-            int j = yScreen / 13;
-            if (Hang.onMap(i, j))
+            int i = yScreen / 14;
+            int j = yScreen / 14;
+            if (Map.onMap(i, j))
             {
-                Hang.map[i, j] = color;
+                Map.map[i, j] = color;
             }
-        }*/
+        }
 
         #region Draw & Eraser this block onto ImageBuffer
         public void drawBlock(Graphics gr)
         {
             gr.DrawImage(Tetris_Windows_Mobile.Properties.Resources.colors,
-                         new Rectangle(xScreen, yScreen, 13, 13),
-                         new Rectangle(color * 13, 0, 13, 13),
+                         new Rectangle(xScreen, yScreen, 14, 14),
+                         new Rectangle(color * 14, 0, 14, 14),
                          GraphicsUnit.Pixel);
         }
 
         public void eraserBlock(Graphics gr)
         {
             gr.DrawImage(Tetris_Windows_Mobile.Properties.Resources.background,
-                         new Rectangle(xScreen, yScreen, 13, 13),
-                         new Rectangle(xScreen, yScreen, 13, 13),
+                         new Rectangle(xScreen, yScreen, 14, 14),
+                         new Rectangle(xScreen, yScreen, 14, 14),
                          GraphicsUnit.Pixel);
         }
 
@@ -88,22 +88,22 @@ namespace Tetris_Windows_Mobile
 
         public bool rightPosition()
         {
-            if (xScreen < 0 || xScreen > MapManager.xMax *  13 - 13) 
+            if (xScreen < 0 || xScreen > Map.xMax *  14 - 14) 
                 return false;
 
-            if (yScreen <= -13) 
+            if (yScreen <= -14) 
                 return true;
 
-            if (yScreen > -13 && yScreen < 0 && MapManager.map[yScreen / 13 + 1, xScreen / 13] == 0)
+            if (yScreen > -14 && yScreen < 0 && Map.map[yScreen / 14 + 1, xScreen / 14] == 0)
                 return true;
 
             if (yScreen >= 0)
             {
-                if (MapManager.onMap(yScreen / 13, xScreen / 13) && yScreen % 13 == 0 && MapManager.map[yScreen / 13, xScreen / 13] == 0) 
+                if (Map.onMap(yScreen / 14, xScreen / 14) && yScreen % 14 == 0 && Map.map[yScreen / 14, xScreen / 14] == 0) 
                     return true;
 
-                if (yScreen % 13 != 0 && MapManager.onMap(yScreen / 13, xScreen / 13) && MapManager.onMap(yScreen / 13 + 1, xScreen / 13) &&
-                    MapManager.map[yScreen / 13, xScreen / 13] == 0 && MapManager.map[yScreen / 13 + 1, xScreen / 13] == 0)
+                if (yScreen % 14 != 0 && Map.onMap(yScreen / 14, xScreen / 14) && Map.onMap(yScreen / 14 + 1, xScreen / 14) &&
+                    Map.map[yScreen / 14, xScreen / 14] == 0 && Map.map[yScreen / 14 + 1, xScreen / 14] == 0)
                     return true;
 
                 return false;
@@ -113,13 +113,13 @@ namespace Tetris_Windows_Mobile
 
         }
 
-        public bool CheckDown()
+        public bool checkDown()
         {
             int currX = positionArr().X;
             int currY = positionArr().Y;
             if (yScreen < 0)
             {
-                if (yScreen >= -30 && MapManager.map[0, currY] == 0) 
+                if (yScreen >= -30 && Map.map[0, currY] == 0) 
                     return true;
 
                 if (yScreen < -30) 
@@ -127,25 +127,25 @@ namespace Tetris_Windows_Mobile
 
                 return false;
             }
-            if (currX < MapManager.xMax - 1 && yScreen >= 0 && MapManager.map[currX + 1, currY] == 0)
+            if (currX < Map.xMax - 1 && yScreen >= 0 && Map.map[currX + 1, currY] == 0)
                 return true;
             return false;
         }
 
         public void moveLeft()
         {
-            xScreen -= 13;
+            xScreen -= 14;
         }
 
         public void moveRight()
         {
-            yScreen += 13;
+            yScreen += 14;
         }
 
-        /*public void moveDown()
+        public void moveDown()
         {
-            Yscreen += Hang.dyFallDown;
-        }*/
+            yScreen += Map.dyFallDown;
+        }
 
         #endregion
 

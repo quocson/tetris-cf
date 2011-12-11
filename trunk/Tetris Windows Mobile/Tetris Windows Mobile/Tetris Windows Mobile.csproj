@@ -66,6 +66,9 @@
     </Compile>
     <Compile Include="Block.cs" />
     <Compile Include="Connecting.cs" />
+    <Compile Include="GameControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Help.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,7 +81,7 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MapManager.cs" />
+    <Compile Include="Map.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="About.resx">
@@ -107,6 +110,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Shape.cs" />
     <Compile Include="TopScores.cs">
       <SubType>Form</SubType>
     </Compile>
