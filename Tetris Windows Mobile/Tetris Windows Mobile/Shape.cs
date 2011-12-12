@@ -21,7 +21,7 @@ namespace Tetris_Windows_Mobile
             int i, j, index;
 
             this.color = color;
-            this.countRotate = rotater;
+            countRotate = rotater;
 
             statusArr = new int[4, 4];
             cube = new Block[4];
@@ -88,7 +88,7 @@ namespace Tetris_Windows_Mobile
             GC.SuppressFinalize(this);
         }
 
-        public int[,] getStatsArr(out int r, out int c)
+        public int[,] getStatusArr(out int r, out int c)
         {
             r = row;
             c = col;
@@ -119,7 +119,7 @@ namespace Tetris_Windows_Mobile
                 cube[i].drawBlock(gr);
             }
         }
-        public void EraserShape(Graphics gr)
+        public void eraserShape(Graphics gr)
         {
             for (int i = 0; i < 4; i++)
             {
@@ -227,7 +227,7 @@ namespace Tetris_Windows_Mobile
         {
             for (int i = 0; i < 4; i++)
             {
-                if (!cube[i].checkDown()) 
+                if (!cube[i].checkDown())
                     return false;
             }
             return true;

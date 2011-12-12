@@ -22,7 +22,6 @@ namespace Tetris_Windows_Mobile
         private void menuItem1_Click(object sender, EventArgs e)
         {
             Close();
-            mainForm.pauseResumeGame();
         }
     }
 }

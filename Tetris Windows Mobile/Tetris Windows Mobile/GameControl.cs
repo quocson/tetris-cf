@@ -18,10 +18,8 @@ namespace Tetris_Windows_Mobile
         public GameControl()
         {
             Location = new Point(0, 0);
-
-            Size = new Size(Map.xMax * 14, Map.yMax * 14);
+            Size = new Size(240, 294);
             imageBuffer = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.background);
-
             indexShape = Map.randShape(out color, out indexRotate);
         }
 
@@ -35,16 +33,16 @@ namespace Tetris_Windows_Mobile
 
         public void gameInitObj(out int k,out int c,out int ro)
         {
-          
-            shape = new Shape(indexShape, color,indexRotate);
-            k = Map.randShape(out c,out ro);
+            shape = new Shape(indexShape, color, indexRotate);
+            k = Map.randShape(out c, out ro);
         }
 
         public void gameDeleteObj()
         {
             shape.Dispose();
         }
-        public void setShape(int kind,int color,int rotate)
+
+        public void setShape(int kind, int color, int rotate)
         {
             indexShape = kind;
             this.color = color;
@@ -71,7 +69,7 @@ namespace Tetris_Windows_Mobile
             if (shape.canFallDown())
             {
                 Graphics gr = Graphics.FromImage(imageBuffer);
-                shape.EraserShape(gr);
+                shape.eraserShape(gr);
                 shape.fallDown();
                 shape.drawShape(gr);
                 gr.Dispose();
