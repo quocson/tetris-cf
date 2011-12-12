@@ -11,6 +11,7 @@ namespace Tetris_Windows_Mobile
         public static int[,] map;
         public static int startXscreen;
         public static int dyFallDown;
+        public static int speedGame;
 
         static Map()
         {
@@ -19,6 +20,7 @@ namespace Tetris_Windows_Mobile
             map = new int[xMax, yMax];
             startXscreen = 70;
             dyFallDown = 14;
+            speedGame = 100;
         }
 
         public static bool onMap(int r,int c)

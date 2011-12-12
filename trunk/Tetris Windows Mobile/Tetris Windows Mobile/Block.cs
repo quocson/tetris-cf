@@ -119,10 +119,10 @@ namespace Tetris_Windows_Mobile
             int currY = positionArr().Y;
             if (yScreen < 0)
             {
-                if (yScreen >= -30 && Map.map[0, currY] == 0) 
+                if (yScreen >= -14 && Map.map[0, currY] == 0) 
                     return true;
 
-                if (yScreen < -30) 
+                if (yScreen < -14) 
                     return true;
 
                 return false;

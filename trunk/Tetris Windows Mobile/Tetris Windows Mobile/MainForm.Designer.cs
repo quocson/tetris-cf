@@ -125,7 +125,6 @@
             this.LostFocus += new System.EventHandler(this.MainForm_LostFocus);
             this.GotFocus += new System.EventHandler(this.MainForm_GotFocus);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MainForm_KeyPress);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.ResumeLayout(false);
 
         }

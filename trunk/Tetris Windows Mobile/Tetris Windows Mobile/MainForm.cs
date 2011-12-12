@@ -10,94 +10,73 @@ using System.Reflection;
 
 namespace Tetris_Windows_Mobile
 {
+    public enum ModeGame { Ready, Loading, New, Playing, CanFall, Paused, Over, Win };
+
     public partial class MainForm : Form
     {
-        private int score;
-        private int level;
-        private int line;
-        private int piece;
-        private bool enableSound;
-        private bool enableGhost;
-        private bool pause;
-        private Bitmap backBuffer;
+        private GameControl gameControl;
+        private GameInfo gameInfo;
+        private ModeGame modeGame;
+        private int shapeNext;
+        private int colorNext;
+        private int rotaterNext;
+        Stack<int> full;
 
         public MainForm()
         {
-
-            backBuffer = new Bitmap(240, 294);
             InitializeComponent();
-        }
-
-        public void pauseResumeGame()
-        {
-        }
-
-        private void updateGame()
-        {
-        }
-
-        private void keyPress (char key)
-        {
-        }
-
-        private void newGame()
-        {
-            score = level = line = piece = 0;
-        }
-
-        private void continueGame()
-        {
+            timer.Interval = Map.speedGame;
+            gameControl = new GameControl();
+            gameInfo = new GameInfo();
+            Controls.Add(gameControl);
+            Controls.Add(gameInfo);
+            full = new Stack<int>();
+            changeMode(ModeGame.Ready);
+            timer.Enabled = true;
         }
 
         private void menuItem3_Click(object sender, EventArgs e)
         {
-            newGame();
+            changeMode(ModeGame.New);
         }
 
         private void menuItem4_Click(object sender, EventArgs e)
         {
-            continueGame();
+            //continue game.
         }
 
         private void menuItem6_Click(object sender, EventArgs e)
         {
-            pauseResumeGame();
             Help help = new Help(this);
             help.ShowDialog();
         }
 
         private void menuItem7_Click(object sender, EventArgs e)
         {
-            pauseResumeGame();
             TopScores highScores = new TopScores(this);
             highScores.ShowDialog();
         }
 
         private void menuItem8_Click(object sender, EventArgs e)
         {
-            pauseResumeGame();
             About about = new About(this);
             about.ShowDialog();
         }
 
         private void menuItem2_Click(object sender, EventArgs e)
         {
-            pauseResumeGame();
         }
 
         private void MainForm_LostFocus(object sender, EventArgs e)
         {
-            pauseResumeGame();
         }
 
         private void MainForm_GotFocus(object sender, EventArgs e)
         {
-            pauseResumeGame();
         }
 
         private void MainForm_KeyPress(object sender, KeyPressEventArgs e)
         {
-            keyPress(e.KeyChar);
         }
 
         private void MainForm_Paint(object sender, PaintEventArgs e)
@@ -105,9 +84,47 @@ namespace Tetris_Windows_Mobile
 
         }
 
+        public  void changeMode(ModeGame mode)
+        {
+            modeGame = mode;
+        }
+
         private void timer_Tick(object sender, EventArgs e)
         {
-            updateGame();
+            switch(modeGame)
+            {
+                case ModeGame.Loading:
+                    break;
+
+                case ModeGame.New:
+                    gameControl.setShape(shapeNext, colorNext, rotaterNext);
+                    gameControl.gameInitObj(out shapeNext, out colorNext, out rotaterNext);
+                    changeMode(ModeGame.Playing);
+                    break;
+
+                case ModeGame.Playing:
+                    gameControl.drawPanel();
+                    if (!gameControl.gameObjFall())
+                    {
+                        gameControl.locked();
+                        gameControl.drawPanel();
+                        if (gameControl.isEndGame())
+                        {
+                            changeMode(ModeGame.Over);
+                            return;
+                        }
+                    }
+                    break;
+
+                case ModeGame.Paused:
+                    break;
+
+                case ModeGame.Over:
+                    break;
+
+                case ModeGame.Win:
+                    break;
+            }   
         }
 
         private void menuItem10_Click(object sender, EventArgs e)
@@ -118,31 +135,6 @@ namespace Tetris_Windows_Mobile
         private void menuItem5_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void MainForm_KeyDown(object sender, KeyEventArgs e)
-        {
-            if ((e.KeyCode == System.Windows.Forms.Keys.Up))
-            {
-                // Up
-            }
-            if ((e.KeyCode == System.Windows.Forms.Keys.Down))
-            {
-                // Down
-            }
-            if ((e.KeyCode == System.Windows.Forms.Keys.Left))
-            {
-                // Left
-            }
-            if ((e.KeyCode == System.Windows.Forms.Keys.Right))
-            {
-                // Right
-            }
-            if ((e.KeyCode == System.Windows.Forms.Keys.Enter))
-            {
-                // Enter
-            }
-
         }
     }
 }
