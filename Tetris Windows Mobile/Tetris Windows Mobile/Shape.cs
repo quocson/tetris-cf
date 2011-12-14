@@ -62,18 +62,18 @@ namespace Tetris_Windows_Mobile
                     break;
             }
 
-            if (countRotate == 0 || countRotate == 2)
-                if (kind == 15)
-                    y = -14;
-                else
-                    if (kind == 57 || kind == 60)
-                        y = -54;
-
             for (i = 0; i < countRotate; i++)
             {
                 if(row != col)
                     rotateArr();
             }
+
+            if (countRotate == 1 || countRotate == 3)
+                if (kind == 15)
+                    y = -15;
+                else
+                    if (kind == 57 || kind == 60)
+                        y = -54;
 
             index = 0;
             for (i = 0; i < row; i++)
