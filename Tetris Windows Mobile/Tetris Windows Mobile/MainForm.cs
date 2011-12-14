@@ -32,12 +32,19 @@ namespace Tetris_Windows_Mobile
             Controls.Add(gameInfo);
             full = new Stack<int>();
             changeMode(ModeGame.Ready);
-            timer.Enabled = true;
         }
 
         private void menuItem3_Click(object sender, EventArgs e)
         {
-            changeMode(ModeGame.New);
+            changeMode(ModeGame.Paused);
+
+            gameControl.resetGame();
+
+            gameControl.gameInitObj(out shapeNext, out colorNext, out rotaterNext);
+
+            changeMode(ModeGame.Playing);
+
+            timer.Enabled = true;
         }
 
         private void menuItem4_Click(object sender, EventArgs e)
@@ -96,19 +103,19 @@ namespace Tetris_Windows_Mobile
                 case ModeGame.Loading:
                     break;
 
-                case ModeGame.New:
+                case  ModeGame.New:
                     gameControl.setShape(shapeNext, colorNext, rotaterNext);
-                    gameControl.gameInitObj(out shapeNext, out colorNext, out rotaterNext);
+                    gameControl.gameInitObj(out  shapeNext, out  colorNext, out  rotaterNext);
                     changeMode(ModeGame.Playing);
                     break;
 
-                case ModeGame.Playing:
+                case  ModeGame.Playing:
                     gameControl.drawPanel();
-                    if (!gameControl.gameObjFall())
+                    if  (!gameControl.gameObjFall())
                     {
                         gameControl.locked();
                         gameControl.drawPanel();
-                        if (gameControl.isEndGame())
+                        if  (gameControl.isEndGame())
                         {
                             changeMode(ModeGame.Over);
                             return;

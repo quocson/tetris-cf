@@ -12,15 +12,16 @@ namespace Tetris_Windows_Mobile
         public static int startXscreen;
         public static int dyFallDown;
         public static int speedGame;
+        public const int d = 13;
 
         static Map()
         {
-            xMax = 17;
+            xMax = 18;
             yMax = 12;
             map = new int[xMax, yMax];
             startXscreen = 70;
-            dyFallDown = 14;
-            speedGame = 100;
+            dyFallDown = Map.d;
+            speedGame = 50;
         }
 
         public static bool onMap(int r,int c)
@@ -31,8 +32,7 @@ namespace Tetris_Windows_Mobile
         public static int randShape(out int color,out int rotate)
         {
             Random rd = new Random(unchecked((int)DateTime.Now.Ticks));
-            int index = rd.Next(0,7);
-            rd = new Random(DateTime.Now.Millisecond);
+            int index = rd.Next(0, 7);
             color = rd.Next(1, 8);
             rotate = rd.Next(0,5);
 
