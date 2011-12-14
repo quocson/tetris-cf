@@ -55,21 +55,22 @@ namespace Tetris_Windows_Mobile
                     col = 3;
                     x = Map.startXscreen;
                     y = -28;
-                    for (i = 0; i < 4; i++)
+                    for (i = 0; i < row * col; i++)
                     {
                         statusArr[i / 3, i % 3] = (kind >> (5 - i)) & 1;
                     }
                     break;
             }
 
-            for (i = 0; i <= countRotate; i++)
+            if (countRotate == 0 || countRotate == 2)
+                if (kind == 15)
+                    y = -14;
+                else
+                    if (kind == 57 || kind == 60)
+                        y = -54;
+
+            for (i = 0; i < countRotate; i++)
             {
-                if (i == 1 || i == 3)
-                    if (kind == 15)
-                        y = -14;
-                    else
-                        if (kind == 57 || kind == 60)
-                            y = -54;
                 if(row != col)
                     rotateArr();
             }
