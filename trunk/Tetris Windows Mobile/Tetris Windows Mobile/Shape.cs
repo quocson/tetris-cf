@@ -36,7 +36,7 @@ namespace Tetris_Windows_Mobile
                 case 15:
                     row = 4; col = 1;
                     x = Map.startXscreen;
-                    y = -56;
+                    y = -54;
                     for (i = 0; i < row; i++)
                         statusArr[i, 0] = 1;
                     break;
@@ -57,14 +57,21 @@ namespace Tetris_Windows_Mobile
                     y = -28;
                     for (i = 0; i < 4; i++)
                     {
-                        statusArr[i / 3, i % 3] =  1;
+                        statusArr[i / 3, i % 3] = (kind >> (5 - i)) & 1;
                     }
                     break;
             }
 
             for (i = 0; i <= countRotate; i++)
             {
-                rotateArr();
+                if (i == 1 || i == 3)
+                    if (kind == 15)
+                        y = -14;
+                    else
+                        if (kind == 57 || kind == 60)
+                            y = -54;
+                if(row != col)
+                    rotateArr();
             }
 
             index = 0;
