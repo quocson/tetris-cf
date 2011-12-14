@@ -55,9 +55,9 @@ namespace Tetris_Windows_Mobile
                     col = 3;
                     x = Map.startXscreen;
                     y = -28;
-                    for (i = 0; i < row * col; i++)
+                    for (i = 0; i < 4; i++)
                     {
-                        statusArr[i / 3, i % 3] = (kind >> (5 - i)) & 1;
+                        statusArr[i / 3, i % 3] =  1;
                     }
                     break;
             }
@@ -73,7 +73,7 @@ namespace Tetris_Windows_Mobile
                 {
                     if (statusArr[i, j] == 1)
                     {
-                        cube[index++] = new Block(x + j * 14, y + i * 14, color);
+                        cube[index++] = new Block(x + j * Map.d, y + i * Map.d, color);
                     }
                 }
         }
@@ -133,17 +133,17 @@ namespace Tetris_Windows_Mobile
 
         public bool canMoveLeft()
         {
-            if (x < 14 || (y + 14 * row) == 0) 
+            if (x < Map.d || (y + Map.d * row) == 0) 
                 return false;
 
-            int tmpX = x - 14;
+            int tmpX = x - Map.d;
             int tmpY = y;
             for (int i = 0; i < row; i++)
                 for (int j = 0; j < col; j++)
                 {
                     if (statusArr[i, j] == 1)
                     {
-                        Block tmp = new Block(tmpX + j * 14, tmpY + i * 14, color);
+                        Block tmp = new Block(tmpX + j * Map.d, tmpY + i * Map.d, color);
                         if (!tmp.rightPosition()) 
                             return false;
                     }
@@ -155,17 +155,17 @@ namespace Tetris_Windows_Mobile
 
         public bool canMoveRight()
         {
-            if (x > Map.xMax * 14 - 14 || (y + 14 * row) == 0) 
+            if (x > Map.xMax * Map.d - Map.d || (y + Map.d * row) == 0) 
                 return false;
 
-            int tmpX = x + 14;
+            int tmpX = x + Map.d;
             int tmpY = y;
             for (int i = 0; i < row; i++)
                 for (int j = 0; j < col; j++)
                 {
                     if (statusArr[i, j] == 1)
                     {
-                        Block tmp = new Block(tmpX + j * 14, tmpY + i * 14, color);
+                        Block tmp = new Block(tmpX + j * Map.d, tmpY + i * Map.d, color);
                         if (!tmp.rightPosition()) 
                             return false;
                     }
@@ -186,7 +186,7 @@ namespace Tetris_Windows_Mobile
                     tmpArr[j, row - i - 1] = statusArr[i, j];
                     if (tmpArr[j, row - i - 1] == 1)
                     {
-                        Block tmp = new Block(x + (row - i - 1) * 14, y + j * 14, color);
+                        Block tmp = new Block(x + (row - i - 1) * Map.d, y + j * Map.d, color);
                         if (!tmp.rightPosition()) 
                             rotatable = false;
                     }
@@ -195,8 +195,8 @@ namespace Tetris_Windows_Mobile
             if (rotatable == true)
                 return true;
 
-            int dx = ((x + 14 * tmpCol - Map.xMax * 14) / 14 <= 0) ? 0 : (x + 14 * tmpCol - Map.xMax) / 14;
-            int tmpX = x - 14, tmpY = y;
+            int dx = ((x + Map.d * tmpCol - Map.xMax * Map.d) / Map.d <= 0) ? 0 : (x + Map.d * tmpCol - Map.xMax) / Map.d;
+            int tmpX = x - Map.d, tmpY = y;
             rotatable = true;
             do
             {
@@ -205,7 +205,7 @@ namespace Tetris_Windows_Mobile
                     {
                         if (tmpArr[i, j] == 1)
                         {
-                            Block tmp = new Block(tmpX + j * 14, tmpY + i * 14, color);
+                            Block tmp = new Block(tmpX + j * Map.d, tmpY + i * Map.d, color);
                             if (!tmp.rightPosition()) 
                                 rotatable = false;
                         }
@@ -215,11 +215,11 @@ namespace Tetris_Windows_Mobile
 
                 if (rotatable)
                 {
-                    tmpX -= 14;
+                    tmpX -= Map.d;
                     dx--;
                 }
             } while (dx > 0);
-            x = tmpX + 14;
+            x = tmpX + Map.d;
             return true;
         }
 
@@ -240,7 +240,7 @@ namespace Tetris_Windows_Mobile
             {
                 cube[i].moveLeft();
             }
-            x -= 14;
+            x -= Map.d;
         }
 
         public void moveRight()
@@ -250,7 +250,7 @@ namespace Tetris_Windows_Mobile
             {
                 cube[i].moveRight();
             }
-            x += 14;
+            x += Map.d;
         }
 
         public void fallDown()
@@ -310,8 +310,8 @@ namespace Tetris_Windows_Mobile
                     statusArr[i, j] = tmpArr[i, j];
                     if (statusArr[i, j] == 1)
                     {
-                        cube[index].ScreenX = x + j * 14;
-                        cube[index].ScreenY = y + i * 14;
+                        cube[index].ScreenX = x + j * Map.d;
+                        cube[index].ScreenY = y + i * Map.d;
                         index++;
                     }
                 }
@@ -330,7 +330,7 @@ namespace Tetris_Windows_Mobile
         public Stack<int> checkFullLine()
         {
             Stack<int> fullLine = new Stack<int>();
-            int rootLine = y / 14;
+            int rootLine = y / Map.d;
             int dxLine = row;
             int i, j, counter;
             for (i = rootLine; i < rootLine + dxLine; i++)

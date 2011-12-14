@@ -51,13 +51,13 @@ namespace Tetris_Windows_Mobile
 
         public Point positionArr()
         {
-            return new Point(yScreen / 14, xScreen / 14);
+            return new Point(yScreen / Map.d, xScreen / Map.d);
         }
 
         public void lockedArr()
         {
-            int i = yScreen / 14;
-            int j = yScreen / 14;
+            int i = yScreen / Map.d;
+            int j = yScreen / Map.d;
             if (Map.onMap(i, j))
             {
                 Map.map[i, j] = color;
@@ -68,16 +68,16 @@ namespace Tetris_Windows_Mobile
         public void drawBlock(Graphics gr)
         {
             gr.DrawImage(Tetris_Windows_Mobile.Properties.Resources.colors,
-                         new Rectangle(xScreen, yScreen, 14, 14),
-                         new Rectangle(color * 14, 0, 14, 14),
+                         new Rectangle(xScreen, yScreen, Map.d - 1, Map.d - 1),
+                         new Rectangle(color * Map.d, 0, Map.d, Map.d),
                          GraphicsUnit.Pixel);
         }
 
         public void eraserBlock(Graphics gr)
         {
             gr.DrawImage(Tetris_Windows_Mobile.Properties.Resources.background,
-                         new Rectangle(xScreen, yScreen, 14, 14),
-                         new Rectangle(xScreen, yScreen, 14, 14),
+                         new Rectangle(xScreen, yScreen, Map.d, Map.d),
+                         new Rectangle(xScreen, yScreen, Map.d, Map.d),
                          GraphicsUnit.Pixel);
         }
 
@@ -88,22 +88,22 @@ namespace Tetris_Windows_Mobile
 
         public bool rightPosition()
         {
-            if (xScreen < 0 || xScreen > Map.xMax *  14 - 14) 
+            if (xScreen < 0 || xScreen > Map.xMax *  Map.d - Map.d) 
                 return false;
 
-            if (yScreen <= -14) 
+            if (yScreen <= -Map.d) 
                 return true;
 
-            if (yScreen > -14 && yScreen < 0 && Map.map[yScreen / 14 + 1, xScreen / 14] == 0)
+            if (yScreen > -Map.d && yScreen < 0 && Map.map[yScreen / Map.d + 1, xScreen / Map.d] == 0)
                 return true;
 
             if (yScreen >= 0)
             {
-                if (Map.onMap(yScreen / 14, xScreen / 14) && yScreen % 14 == 0 && Map.map[yScreen / 14, xScreen / 14] == 0) 
+                if (Map.onMap(yScreen / Map.d, xScreen / Map.d) && yScreen % Map.d == 0 && Map.map[yScreen / Map.d, xScreen / Map.d] == 0) 
                     return true;
 
-                if (yScreen % 14 != 0 && Map.onMap(yScreen / 14, xScreen / 14) && Map.onMap(yScreen / 14 + 1, xScreen / 14) &&
-                    Map.map[yScreen / 14, xScreen / 14] == 0 && Map.map[yScreen / 14 + 1, xScreen / 14] == 0)
+                if (yScreen % Map.d != 0 && Map.onMap(yScreen / Map.d, xScreen / Map.d) && Map.onMap(yScreen / Map.d + 1, xScreen / Map.d) &&
+                    Map.map[yScreen / Map.d, xScreen / Map.d] == 0 && Map.map[yScreen / Map.d + 1, xScreen / Map.d] == 0)
                     return true;
 
                 return false;
@@ -119,10 +119,10 @@ namespace Tetris_Windows_Mobile
             int currY = positionArr().Y;
             if (yScreen < 0)
             {
-                if (yScreen >= -14 && Map.map[0, currY] == 0) 
+                if (yScreen >= -Map.d && Map.map[0, currY] == 0) 
                     return true;
 
-                if (yScreen < -14) 
+                if (yScreen < -Map.d) 
                     return true;
 
                 return false;
@@ -134,12 +134,12 @@ namespace Tetris_Windows_Mobile
 
         public void moveLeft()
         {
-            xScreen -= 14;
+            xScreen -= Map.d;
         }
 
         public void moveRight()
         {
-            yScreen += 14;
+            yScreen += Map.d;
         }
 
         public void moveDown()
