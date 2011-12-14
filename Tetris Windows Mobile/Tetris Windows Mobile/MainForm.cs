@@ -41,6 +41,7 @@ namespace Tetris_Windows_Mobile
             gameControl.resetGame();
 
             gameControl.gameInitObj(out shapeNext, out colorNext, out rotaterNext);
+            gameControl.setShape(shapeNext, colorNext, rotaterNext);
 
             changeMode(ModeGame.Playing);
 
