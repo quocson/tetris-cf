@@ -15,7 +15,6 @@ namespace Tetris_Windows_Mobile
         public int color;
         private int countRotate;
 
-        #region Constructor
         public Shape(int kind, int color, int rotater)
         {
             int i, j, index;
@@ -35,7 +34,7 @@ namespace Tetris_Windows_Mobile
             {
                 case 15:
                     row = 4; col = 1;
-                    x = Map.startXscreen;
+                    x = Constant.startXscreen;
                     y = -54;
                     for (i = 0; i < row; i++)
                         statusArr[i, 0] = 1;
@@ -43,7 +42,7 @@ namespace Tetris_Windows_Mobile
 
                 case 31:
                     row = col = 2;
-                    x = Map.startXscreen;
+                    x = Constant.startXscreen;
                     y = -28;
                     for (i = 0; i < row; i++)
                         for (j = 0; j < col; j++)
@@ -53,7 +52,7 @@ namespace Tetris_Windows_Mobile
                 default:
                     row = 2;
                     col = 3;
-                    x = Map.startXscreen;
+                    x = Constant.startXscreen;
                     y = -28;
                     for (i = 0; i < row * col; i++)
                     {
@@ -81,11 +80,10 @@ namespace Tetris_Windows_Mobile
                 {
                     if (statusArr[i, j] == 1)
                     {
-                        cube[index++] = new Block(x + j * Map.d, y + i * Map.d, color);
+                        cube[index++] = new Block(x + j * Constant.d, y + i * Constant.d, color);
                     }
                 }
         }
-        #endregion
 
         public void Dispose()
         {
@@ -119,7 +117,6 @@ namespace Tetris_Windows_Mobile
             get { return x; }
         }
 
-        #region Draw& Eraser shape
         public void drawShape(Graphics gr)
         {
             for (int i = 0; i < 4; i++)
@@ -127,6 +124,7 @@ namespace Tetris_Windows_Mobile
                 cube[i].drawBlock(gr);
             }
         }
+
         public void eraserShape(Graphics gr)
         {
             for (int i = 0; i < 4; i++)
@@ -134,24 +132,20 @@ namespace Tetris_Windows_Mobile
                 cube[i].eraserBlock(gr);
             }
         }
-        #endregion
-
-
-        #region Check & Move shape
 
         public bool canMoveLeft()
         {
-            if (x < Map.d || (y + Map.d * row) == 0) 
+            if (x < Constant.d || (y + Constant.d * row) == 0) 
                 return false;
 
-            int tmpX = x - Map.d;
+            int tmpX = x - Constant.d;
             int tmpY = y;
             for (int i = 0; i < row; i++)
                 for (int j = 0; j < col; j++)
                 {
                     if (statusArr[i, j] == 1)
                     {
-                        Block tmp = new Block(tmpX + j * Map.d, tmpY + i * Map.d, color);
+                        Block tmp = new Block(tmpX + j * Constant.d, tmpY + i * Constant.d, color);
                         if (!tmp.rightPosition()) 
                             return false;
                     }
@@ -163,17 +157,17 @@ namespace Tetris_Windows_Mobile
 
         public bool canMoveRight()
         {
-            if (x > Map.xMax * Map.d - Map.d || (y + Map.d * row) == 0) 
+            if (x > Constant.xMax * Constant.d - Constant.d || (y + Constant.d * row) == 0) 
                 return false;
 
-            int tmpX = x + Map.d;
+            int tmpX = x + Constant.d;
             int tmpY = y;
             for (int i = 0; i < row; i++)
                 for (int j = 0; j < col; j++)
                 {
                     if (statusArr[i, j] == 1)
                     {
-                        Block tmp = new Block(tmpX + j * Map.d, tmpY + i * Map.d, color);
+                        Block tmp = new Block(tmpX + j * Constant.d, tmpY + i * Constant.d, color);
                         if (!tmp.rightPosition()) 
                             return false;
                     }
@@ -194,7 +188,7 @@ namespace Tetris_Windows_Mobile
                     tmpArr[j, row - i - 1] = statusArr[i, j];
                     if (tmpArr[j, row - i - 1] == 1)
                     {
-                        Block tmp = new Block(x + (row - i - 1) * Map.d, y + j * Map.d, color);
+                        Block tmp = new Block(x + (row - i - 1) * Constant.d, y + j * Constant.d, color);
                         if (!tmp.rightPosition()) 
                             rotatable = false;
                     }
@@ -203,8 +197,8 @@ namespace Tetris_Windows_Mobile
             if (rotatable == true)
                 return true;
 
-            int dx = ((x + Map.d * tmpCol - Map.xMax * Map.d) / Map.d <= 0) ? 0 : (x + Map.d * tmpCol - Map.xMax) / Map.d;
-            int tmpX = x - Map.d, tmpY = y;
+            int dx = ((x + Constant.d * tmpCol - Constant.xMax * Constant.d) / Constant.d <= 0) ? 0 : (x + Constant.d * tmpCol - Constant.xMax) / Constant.d;
+            int tmpX = x - Constant.d, tmpY = y;
             rotatable = true;
             do
             {
@@ -213,7 +207,7 @@ namespace Tetris_Windows_Mobile
                     {
                         if (tmpArr[i, j] == 1)
                         {
-                            Block tmp = new Block(tmpX + j * Map.d, tmpY + i * Map.d, color);
+                            Block tmp = new Block(tmpX + j * Constant.d, tmpY + i * Constant.d, color);
                             if (!tmp.rightPosition()) 
                                 rotatable = false;
                         }
@@ -223,11 +217,11 @@ namespace Tetris_Windows_Mobile
 
                 if (rotatable)
                 {
-                    tmpX -= Map.d;
+                    tmpX -= Constant.d;
                     dx--;
                 }
             } while (dx > 0);
-            x = tmpX + Map.d;
+            x = tmpX + Constant.d;
             return true;
         }
 
@@ -248,7 +242,7 @@ namespace Tetris_Windows_Mobile
             {
                 cube[i].moveLeft();
             }
-            x -= Map.d;
+            x -= Constant.d;
         }
 
         public void moveRight()
@@ -258,7 +252,7 @@ namespace Tetris_Windows_Mobile
             {
                 cube[i].moveRight();
             }
-            x += Map.d;
+            x += Constant.d;
         }
 
         public void fallDown()
@@ -267,7 +261,7 @@ namespace Tetris_Windows_Mobile
             {
                 cube[i].moveDown();
             }
-            y += Map.dyFallDown;
+            y += Constant.dyFallDown;
         }
 
         private void rotateArr()
@@ -318,14 +312,12 @@ namespace Tetris_Windows_Mobile
                     statusArr[i, j] = tmpArr[i, j];
                     if (statusArr[i, j] == 1)
                     {
-                        cube[index].ScreenX = x + j * Map.d;
-                        cube[index].ScreenY = y + i * Map.d;
+                        cube[index].ScreenX = x + j * Constant.d;
+                        cube[index].ScreenY = y + i * Constant.d;
                         index++;
                     }
                 }
         }
-
-        #endregion
 
         public void lockShape()
         {
@@ -338,18 +330,18 @@ namespace Tetris_Windows_Mobile
         public Stack<int> checkFullLine()
         {
             Stack<int> fullLine = new Stack<int>();
-            int rootLine = y / Map.d;
+            int rootLine = y / Constant.d;
             int dxLine = row;
             int i, j, counter;
             for (i = rootLine; i < rootLine + dxLine; i++)
             {
                 counter = 0;
-                for (j = 0; j < Map.yMax; j++)
+                for (j = 0; j < Constant.yMax; j++)
                 {
-                    if (Map.onMap(i, j) && Map.map[i, j] != 0) 
+                    if (Constant.onMap(i, j) && Constant.map[i, j] != 0) 
                         counter++;
                 }
-                if (counter == Map.yMax)
+                if (counter == Constant.yMax)
                 {
                     fullLine.Push(i);
                 }

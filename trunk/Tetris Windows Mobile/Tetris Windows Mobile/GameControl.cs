@@ -20,12 +20,12 @@ namespace Tetris_Windows_Mobile
             Location = new Point(0, 0);
             Size = new Size(240, 294);
             imageBuffer = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.background);
-            indexShape = Map.randShape(out color, out indexRotate);
+            indexShape = Constant.randShape(out color, out indexRotate);
         }
 
         public void resetGame()
         {
-            Map.resetMap();
+            Constant.resetMap();
             imageBuffer.Dispose();
             imageBuffer = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.background);
             Refresh();
@@ -34,7 +34,7 @@ namespace Tetris_Windows_Mobile
         public void gameInitObj(out int k,out int c,out int ro)
         {
             shape = new Shape(indexShape, color, indexRotate);
-            k = Map.randShape(out c, out ro);
+            k = Constant.randShape(out c, out ro);
         }
 
         public void gameDeleteObj()

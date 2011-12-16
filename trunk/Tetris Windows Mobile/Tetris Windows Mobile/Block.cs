@@ -49,53 +49,53 @@ namespace Tetris_Windows_Mobile
 
         public Point positionArr()
         {
-            return new Point(yScreen / Map.d, xScreen / Map.d);
+            return new Point(yScreen / Constant.d, xScreen / Constant.d);
         }
 
         public void lockedArr()
         {
-            int i = yScreen / Map.d;
-            int j = xScreen / Map.d;
-            if (Map.onMap(i, j))
+            int i = yScreen / Constant.d;
+            int j = xScreen / Constant.d;
+            if (Constant.onMap(i, j))
             {
-                Map.map[i, j] = color;
+                Constant.map[i, j] = color;
             }
         }
 
         public void drawBlock(Graphics gr)
         {
-            gr.DrawImage(Map.iColor,
-                         new Rectangle(xScreen, yScreen, Map.d - 1, Map.d - 1),
-                         new Rectangle(color * Map.d, 0, Map.d, Map.d),
+            gr.DrawImage(Constant.iColor,
+                         new Rectangle(xScreen, yScreen, Constant.d - 1, Constant.d - 1),
+                         new Rectangle((color - 1) * Constant.d, 0, Constant.d, Constant.d),
                          GraphicsUnit.Pixel);
         }
 
         public void eraserBlock(Graphics gr)
         {
-            gr.DrawImage(Map.iBackground,
-                         new Rectangle(xScreen, yScreen, Map.d, Map.d),
-                         new Rectangle(xScreen, yScreen, Map.d, Map.d),
+            gr.DrawImage(Constant.iBackground,
+                         new Rectangle(xScreen, yScreen, Constant.d, Constant.d),
+                         new Rectangle(xScreen, yScreen, Constant.d, Constant.d),
                          GraphicsUnit.Pixel);
         }
 
         public bool rightPosition()
         {
-            if (xScreen < 0 || xScreen > Map.xMax *  Map.d - Map.d) 
+            if (xScreen < 0 || xScreen > Constant.xMax *  Constant.d - Constant.d) 
                 return false;
 
-            if (yScreen <= -Map.d) 
+            if (yScreen <= -Constant.d) 
                 return true;
 
-            if (yScreen > -Map.d && yScreen < 0 && Map.map[yScreen / Map.d + 1, xScreen / Map.d] == 0)
+            if (yScreen > -Constant.d && yScreen < 0 && Constant.map[yScreen / Constant.d + 1, xScreen / Constant.d] == 0)
                 return true;
 
             if (yScreen >= 0)
             {
-                if (Map.onMap(yScreen / Map.d, xScreen / Map.d) && yScreen % Map.d == 0 && Map.map[yScreen / Map.d, xScreen / Map.d] == 0) 
+                if (Constant.onMap(yScreen / Constant.d, xScreen / Constant.d) && yScreen % Constant.d == 0 && Constant.map[yScreen / Constant.d, xScreen / Constant.d] == 0) 
                     return true;
 
-                if (yScreen % Map.d != 0 && Map.onMap(yScreen / Map.d, xScreen / Map.d) && Map.onMap(yScreen / Map.d + 1, xScreen / Map.d) &&
-                    Map.map[yScreen / Map.d, xScreen / Map.d] == 0 && Map.map[yScreen / Map.d + 1, xScreen / Map.d] == 0)
+                if (yScreen % Constant.d != 0 && Constant.onMap(yScreen / Constant.d, xScreen / Constant.d) && Constant.onMap(yScreen / Constant.d + 1, xScreen / Constant.d) &&
+                    Constant.map[yScreen / Constant.d, xScreen / Constant.d] == 0 && Constant.map[yScreen / Constant.d + 1, xScreen / Constant.d] == 0)
                     return true;
 
                 return false;
@@ -111,32 +111,32 @@ namespace Tetris_Windows_Mobile
             int currY = positionArr().Y;
             if (yScreen < 0)
             {
-                if (yScreen >= -Map.d && Map.map[0, currY] == 0) 
+                if (yScreen >= -Constant.d && Constant.map[0, currY] == 0) 
                     return true;
 
-                if (yScreen < -Map.d) 
+                if (yScreen < -Constant.d) 
                     return true;
 
                 return false;
             }
-            if (currX < Map.xMax - 1 && yScreen >= 0 && Map.map[currX + 1, currY] == 0)
+            if (currX < Constant.xMax - 1 && yScreen >= 0 && Constant.map[currX + 1, currY] == 0)
                 return true;
             return false;
         }
 
         public void moveLeft()
         {
-            xScreen -= Map.d;
+            xScreen -= Constant.d;
         }
 
         public void moveRight()
         {
-            yScreen += Map.d;
+            yScreen += Constant.d;
         }
 
         public void moveDown()
         {
-            yScreen += Map.dyFallDown;
+            yScreen += Constant.dyFallDown;
         }
     }
 }

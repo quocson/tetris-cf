@@ -25,7 +25,7 @@ namespace Tetris_Windows_Mobile
         public MainForm()
         {
             InitializeComponent();
-            timer.Interval = Map.speedGame;
+            timer.Interval = Constant.speedGame;
             gameControl = new GameControl();
             gameInfo = new GameInfo();
             Controls.Add(gameControl);

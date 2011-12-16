@@ -6,7 +6,7 @@ using System.Drawing;
 
 namespace Tetris_Windows_Mobile
 {
-    class Map
+    public class Constant
     {
         public static int xMax, yMax;
         public static int[,] map;
@@ -15,18 +15,20 @@ namespace Tetris_Windows_Mobile
         public static int speedGame;
         public static Bitmap iBackground;
         public static Bitmap iColor;
+        public static Random rd;
         public const int d = 13;
 
-        static Map()
+        static Constant()
         {
             xMax = 18;
             yMax = 12;
             map = new int[xMax, yMax];
             startXscreen = 70;
-            dyFallDown = Map.d;
-            speedGame = 100;
+            dyFallDown = Constant.d;
+            speedGame = 10;
             iBackground = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.background);
             iColor = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.colors);
+            rd = new Random(unchecked((int)DateTime.Now.Ticks));
         }
 
         public static bool onMap(int r,int c)
@@ -36,7 +38,6 @@ namespace Tetris_Windows_Mobile
 
         public static int randShape(out int color,out int rotate)
         {
-            Random rd = new Random(unchecked((int)DateTime.Now.Ticks));
             int index = rd.Next(0, 7);
             color = rd.Next(1, 8);
             rotate = rd.Next(0,5);
@@ -79,19 +80,5 @@ namespace Tetris_Windows_Mobile
                 }
             }
         }
-
-        /*public static void showmap()
-        {
-            string mess = "";
-            for (int i = 0; i < xMax; i++)
-            {
-                for (int j = 0; j < yMax; j++)
-                {
-                    mess += map[i, j] + " ";
-                }
-                mess += "\n";
-            }
-            MessageBox.Show(mess);
-        }*/
     }
 }
