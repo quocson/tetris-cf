@@ -116,10 +116,14 @@ namespace Tetris_Windows_Mobile
                     {
                         gameControl.locked();
                         gameControl.drawPanel();
-                        if  (gameControl.isEndGame())
+                        if (gameControl.isEndGame())
                         {
                             changeMode(ModeGame.Over);
                             return;
+                        }
+                        else
+                        {
+                            changeMode(ModeGame.New);
                         }
                     }
                     break;
