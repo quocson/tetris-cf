@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
+using System.Drawing;
 
 namespace Tetris_Windows_Mobile
 {
@@ -12,6 +13,8 @@ namespace Tetris_Windows_Mobile
         public static int startXscreen;
         public static int dyFallDown;
         public static int speedGame;
+        public static Bitmap iBackground;
+        public static Bitmap iColor;
         public const int d = 13;
 
         static Map()
@@ -21,7 +24,9 @@ namespace Tetris_Windows_Mobile
             map = new int[xMax, yMax];
             startXscreen = 70;
             dyFallDown = Map.d;
-            speedGame = 50;
+            speedGame = 100;
+            iBackground = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.background);
+            iColor = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.colors);
         }
 
         public static bool onMap(int r,int c)

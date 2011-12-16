@@ -38,9 +38,9 @@
             this.menuItem8 = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
             this.menuItem10 = new System.Windows.Forms.MenuItem();
+            this.menuItem9 = new System.Windows.Forms.MenuItem();
             this.menuItem5 = new System.Windows.Forms.MenuItem();
             this.timer = new System.Windows.Forms.Timer();
-            this.menuItem9 = new System.Windows.Forms.MenuItem();
             this.SuspendLayout();
             // 
             // mainMenu
@@ -95,6 +95,10 @@
             this.menuItem10.Text = "Sound";
             this.menuItem10.Click += new System.EventHandler(this.menuItem10_Click);
             // 
+            // menuItem9
+            // 
+            this.menuItem9.Text = "Ghost";
+            // 
             // menuItem5
             // 
             this.menuItem5.Text = "Exit";
@@ -102,11 +106,8 @@
             // 
             // timer
             // 
+            this.timer.Interval = 1;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
-            // menuItem9
-            // 
-            this.menuItem9.Text = "Ghost";
             // 
             // MainForm
             // 

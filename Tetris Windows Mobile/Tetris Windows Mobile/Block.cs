@@ -9,9 +9,8 @@ namespace Tetris_Windows_Mobile
     public class Block : IDisposable
     {
         private int xScreen, yScreen;
-        private int color;
 
-        #region Constructor
+        private int color;
 
         public Block()
         {
@@ -29,7 +28,6 @@ namespace Tetris_Windows_Mobile
             yScreen = jScreen;
             color = iColor;
         }
-        #endregion
 
         public int ScreenX
         {
@@ -57,17 +55,16 @@ namespace Tetris_Windows_Mobile
         public void lockedArr()
         {
             int i = yScreen / Map.d;
-            int j = yScreen / Map.d;
+            int j = xScreen / Map.d;
             if (Map.onMap(i, j))
             {
                 Map.map[i, j] = color;
             }
         }
 
-        #region Draw & Eraser this block onto ImageBuffer
         public void drawBlock(Graphics gr)
         {
-            gr.DrawImage(Tetris_Windows_Mobile.Properties.Resources.colors,
+            gr.DrawImage(Map.iColor,
                          new Rectangle(xScreen, yScreen, Map.d - 1, Map.d - 1),
                          new Rectangle(color * Map.d, 0, Map.d, Map.d),
                          GraphicsUnit.Pixel);
@@ -75,16 +72,11 @@ namespace Tetris_Windows_Mobile
 
         public void eraserBlock(Graphics gr)
         {
-            gr.DrawImage(Tetris_Windows_Mobile.Properties.Resources.background,
+            gr.DrawImage(Map.iBackground,
                          new Rectangle(xScreen, yScreen, Map.d, Map.d),
                          new Rectangle(xScreen, yScreen, Map.d, Map.d),
                          GraphicsUnit.Pixel);
         }
-
-        #endregion
-
-
-        #region Check move & move this block
 
         public bool rightPosition()
         {
@@ -146,9 +138,5 @@ namespace Tetris_Windows_Mobile
         {
             yScreen += Map.dyFallDown;
         }
-
-        #endregion
-
-
     }
 }
