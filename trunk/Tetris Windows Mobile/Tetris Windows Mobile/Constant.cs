@@ -13,7 +13,7 @@ namespace Tetris_Windows_Mobile
         public static int startXscreen;
         public const int dyFallDown = 13;
         public static int speedGame;
-        public static Bitmap iBoderGame;
+        public static Bitmap iBorderGame;
         public static Bitmap iNext;
         public static Bitmap iScore;
         public static Bitmap iLevel;
@@ -30,7 +30,7 @@ namespace Tetris_Windows_Mobile
             map = new int[xMax, yMax];
             startXscreen = 70;
             speedGame = 100;
-            iBoderGame = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.boder);
+            iBorderGame = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.border);
             iNext = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.next);
             iScore = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.score);
             iLevel = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.level);
