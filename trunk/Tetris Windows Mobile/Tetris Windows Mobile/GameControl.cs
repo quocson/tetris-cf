@@ -31,6 +31,14 @@ namespace Tetris_Windows_Mobile
             Refresh();
         }
 
+        public void saveGame()
+        {
+        }
+
+        public void loadGame()
+        {
+        }
+
         public void gameInitObj(out int k,out int c,out int ro)
         {
             shape = new Shape(indexShape, color, indexRotate);
@@ -54,7 +62,7 @@ namespace Tetris_Windows_Mobile
             shape.lockShape();
         }
 
-        public void Buff(out Bitmap x)
+        public void buff(out Bitmap x)
         {
             x = imageBuffer;
         }
@@ -101,16 +109,15 @@ namespace Tetris_Windows_Mobile
             imageBuffer.Dispose();
             imageBuffer = Tetris_Windows_Mobile.Properties.Resources.background;
         }
-        #region Override OnPaint & OnPaintBackground method
 
         protected override void OnPaint(PaintEventArgs e)
         {
             e.Graphics.DrawImage(imageBuffer, 0, 0);
         }
+
         protected override void OnPaintBackground(PaintEventArgs e)
         {
 
-        }
-        #endregion    
+        }   
     }
 }

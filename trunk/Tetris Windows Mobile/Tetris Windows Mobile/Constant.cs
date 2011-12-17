@@ -25,7 +25,7 @@ namespace Tetris_Windows_Mobile
             map = new int[xMax, yMax];
             startXscreen = 70;
             dyFallDown = Constant.d;
-            speedGame = 10;
+            speedGame = 100;
             iBackground = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.background);
             iColor = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.colors);
             rd = new Random(unchecked((int)DateTime.Now.Ticks));
