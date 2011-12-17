@@ -19,7 +19,7 @@ namespace Tetris_Windows_Mobile
         {
             Location = new Point(0, 0);
             Size = new Size(240, 294);
-            imageBuffer = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.background);
+            imageBuffer = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.boder);
             indexShape = Constant.randShape(out color, out indexRotate);
         }
 
@@ -27,7 +27,7 @@ namespace Tetris_Windows_Mobile
         {
             Constant.resetMap();
             imageBuffer.Dispose();
-            imageBuffer = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.background);
+            imageBuffer = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.boder);
             Refresh();
         }
 
@@ -107,7 +107,7 @@ namespace Tetris_Windows_Mobile
         public void ClearScreen()
         {
             imageBuffer.Dispose();
-            imageBuffer = Tetris_Windows_Mobile.Properties.Resources.background;
+            imageBuffer = Tetris_Windows_Mobile.Properties.Resources.boder;
         }
 
         protected override void OnPaint(PaintEventArgs e)

@@ -69,7 +69,16 @@
     <Compile Include="GameControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="GameInfo.cs">
+    <Compile Include="GameLevel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GameLine.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GamePiece.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GameScore.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Help.cs">
@@ -85,6 +94,9 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Constant.cs" />
+    <Compile Include="NextShape.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="About.resx">
@@ -123,8 +135,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\arrow.JPG" />
-    <None Include="Resources\background.png" />
     <None Include="Resources\colors.png" />
+    <None Include="Resources\level.png" />
+    <None Include="Resources\next.png" />
+    <None Include="Resources\piece.png" />
+    <None Include="Resources\score.png" />
+    <None Include="Resources\boder.png" />
+    <None Include="Resources\line.png" />
     <Content Include="tetris.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />

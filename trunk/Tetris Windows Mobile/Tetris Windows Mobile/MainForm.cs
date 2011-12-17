@@ -15,7 +15,6 @@ namespace Tetris_Windows_Mobile
     public partial class MainForm : Form
     {
         private GameControl gameControl;
-        private GameInfo gameInfo;
         private ModeGame modeGame;
         private int shapeNext;
         private int colorNext;
@@ -27,9 +26,7 @@ namespace Tetris_Windows_Mobile
             InitializeComponent();
             timer.Interval = Constant.speedGame;
             gameControl = new GameControl();
-            gameInfo = new GameInfo();
             Controls.Add(gameControl);
-            Controls.Add(gameInfo);
             full = new Stack<int>();
             changeMode(ModeGame.Ready);
         }

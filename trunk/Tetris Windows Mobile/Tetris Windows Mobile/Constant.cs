@@ -11,9 +11,14 @@ namespace Tetris_Windows_Mobile
         public static int xMax, yMax;
         public static int[,] map;
         public static int startXscreen;
-        public static int dyFallDown;
+        public const int dyFallDown = 13;
         public static int speedGame;
-        public static Bitmap iBackground;
+        public static Bitmap iBoderGame;
+        public static Bitmap iNext;
+        public static Bitmap iScore;
+        public static Bitmap iLevel;
+        public static Bitmap iLine;
+        public static Bitmap iPiece;
         public static Bitmap iColor;
         public static Random rd;
         public const int d = 13;
@@ -24,9 +29,13 @@ namespace Tetris_Windows_Mobile
             yMax = 12;
             map = new int[xMax, yMax];
             startXscreen = 70;
-            dyFallDown = Constant.d;
             speedGame = 100;
-            iBackground = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.background);
+            iBoderGame = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.boder);
+            iNext = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.next);
+            iScore = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.score);
+            iLevel = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.level);
+            iLine = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.line);
+            iPiece = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.piece);
             iColor = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.colors);
             rd = new Random(unchecked((int)DateTime.Now.Ticks));
         }
