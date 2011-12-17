@@ -53,12 +53,13 @@ namespace Tetris_Windows_Mobile
             gameControl.resetGame();
 
             gameScore.Score = 0;
-            gameLevel.Level = 0;
+            gameLevel.Level = 1;
             gameLine.Line = 0;
             gamePiece.Piece = 0;
 
-            gameControl.gameInitObj(out shapeNext, out colorNext, out rotaterNext);
+            gameControl.gameInitObj(out  shapeNext, out  colorNext, out  rotaterNext);
             gameControl.setShape(shapeNext, colorNext, rotaterNext);
+            nextShape.drawNextShape(shapeNext, colorNext, rotaterNext);
 
             changeMode(ModeGame.Playing);
 
@@ -124,6 +125,7 @@ namespace Tetris_Windows_Mobile
                 case  ModeGame.New:
                     gameControl.setShape(shapeNext, colorNext, rotaterNext);
                     gameControl.gameInitObj(out  shapeNext, out  colorNext, out  rotaterNext);
+                    nextShape.drawNextShape(shapeNext, colorNext, rotaterNext);
                     changeMode(ModeGame.Playing);
                     break;
 
