@@ -15,6 +15,11 @@ namespace Tetris_Windows_Mobile
     public partial class MainForm : Form
     {
         private GameControl gameControl;
+        private NextShape nextShape;
+        private GameScore gameScore;
+        private GameLevel gameLevel;
+        private GameLine gameLine;
+        private GamePiece gamePiece;
         private ModeGame modeGame;
         private int shapeNext;
         private int colorNext;
@@ -26,7 +31,17 @@ namespace Tetris_Windows_Mobile
             InitializeComponent();
             timer.Interval = Constant.speedGame;
             gameControl = new GameControl();
+            nextShape = new NextShape();
+            gameScore = new GameScore();
+            gameLevel = new GameLevel();
+            gameLine = new GameLine();
+            gamePiece = new GamePiece();
             Controls.Add(gameControl);
+            Controls.Add(nextShape);
+            Controls.Add(gameScore);
+            Controls.Add(gameLevel);
+            Controls.Add(gameLine);
+            Controls.Add(gamePiece);
             full = new Stack<int>();
             changeMode(ModeGame.Ready);
         }
@@ -36,6 +51,11 @@ namespace Tetris_Windows_Mobile
             changeMode(ModeGame.Paused);
 
             gameControl.resetGame();
+
+            gameScore.Score = 0;
+            gameLevel.Level = 0;
+            gameLine.Line = 0;
+            gamePiece.Piece = 0;
 
             gameControl.gameInitObj(out shapeNext, out colorNext, out rotaterNext);
             gameControl.setShape(shapeNext, colorNext, rotaterNext);

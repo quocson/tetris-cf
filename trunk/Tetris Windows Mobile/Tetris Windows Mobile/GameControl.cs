@@ -18,8 +18,8 @@ namespace Tetris_Windows_Mobile
         public GameControl()
         {
             Location = new Point(0, 0);
-            Size = new Size(240, 294);
-            imageBuffer = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.border);
+            Size = new Size(170, 294);
+            imageBuffer = new Bitmap(Constant.iBorderGame);
             indexShape = Constant.randShape(out color, out indexRotate);
         }
 

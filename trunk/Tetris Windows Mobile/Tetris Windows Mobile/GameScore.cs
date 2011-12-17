@@ -15,8 +15,8 @@ namespace Tetris_Windows_Mobile
 
         public GameScore()
         {
-            Location = new Point(0,0);
-            Size = new Size(0, 0);
+            Location = new Point(170, 85);
+            Size = new Size(70, 50);
             imgBuff = new Bitmap(Constant.iScore);
         }
 
@@ -29,7 +29,24 @@ namespace Tetris_Windows_Mobile
         public void drawScore()
         {
             Graphics gr = Graphics.FromImage(imgBuff);
-
+            int tmp = 0;
+            for (int i = 0; i < 7; i++)
+            {
+                switch (i)
+                {
+                    case 0: tmp = score / 1000000; break;
+                    case 1: tmp = score % 1000000 / 100000; break;
+                    case 2: tmp = score % 100000 / 10000; break;
+                    case 3: tmp = score % 10000 / 1000; break;
+                    case 4: tmp = score % 1000 / 100; break;
+                    case 5: tmp = score % 100 / 10; break;
+                    case 6: tmp = score % 10; break;
+                }
+                gr.DrawImage(Constant.iNumber,
+                             new Rectangle(10 + i * 8 + 1, 32, 8, 12),
+                             new Rectangle(tmp * 8, 0, 8, 12),
+                             GraphicsUnit.Pixel);
+            }
             Refresh();
             gr.Dispose();            
         }

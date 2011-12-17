@@ -14,8 +14,8 @@ namespace Tetris_Windows_Mobile
 
         public NextShape()
         {
-            Location = new Point(0,0);
-            Size = new Size(0, 0);
+            Location = new Point(170,0);
+            Size = new Size(70, 85);
             imgBuff = new Bitmap(Constant.iNext);
         }
 
