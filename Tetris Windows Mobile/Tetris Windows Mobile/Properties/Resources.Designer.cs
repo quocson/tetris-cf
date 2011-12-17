@@ -99,6 +99,13 @@ namespace Tetris_Windows_Mobile.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap number {
+            get {
+                object obj = ResourceManager.GetObject("number", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap piece {
             get {
                 object obj = ResourceManager.GetObject("piece", resourceCulture);

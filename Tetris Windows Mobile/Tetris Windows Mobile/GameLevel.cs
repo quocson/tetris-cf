@@ -15,8 +15,8 @@ namespace Tetris_Windows_Mobile
 
         public GameLevel()
         {
-            Location = new Point(0, 0);
-            Size = new Size(0, 0);
+            Location = new Point(170, 135);
+            Size = new Size(70, 55);
             imgBuff = new Bitmap(Constant.iLevel);
         }
 
@@ -29,6 +29,16 @@ namespace Tetris_Windows_Mobile
         public void drawLevel()
         {
             Graphics gr = Graphics.FromImage(imgBuff);
+
+            gr.DrawImage(Constant.iNumber,
+                         new Rectangle(59, 33, 8, 12),
+                         new Rectangle(level % 10 * 8, 0, 8, 12),
+                         GraphicsUnit.Pixel);
+
+            gr.DrawImage(Constant.iNumber,
+                         new Rectangle(51, 33, 8, 12),
+                         new Rectangle(level / 10 * 8, 0, 8, 12),
+                         GraphicsUnit.Pixel);
 
             Refresh();
             gr.Dispose();

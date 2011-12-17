@@ -20,6 +20,7 @@ namespace Tetris_Windows_Mobile
         public static Bitmap iLine;
         public static Bitmap iPiece;
         public static Bitmap iColor;
+        public static Bitmap iNumber;
         public static Random rd;
         public const int d = 13;
 
@@ -37,6 +38,7 @@ namespace Tetris_Windows_Mobile
             iLine = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.line);
             iPiece = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.piece);
             iColor = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.colors);
+            iNumber = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.number);
             rd = new Random(unchecked((int)DateTime.Now.Ticks));
         }
 
