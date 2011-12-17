@@ -64,9 +64,9 @@ namespace Tetris_Windows_Mobile.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap boder {
+        internal static System.Drawing.Bitmap border {
             get {
-                object obj = ResourceManager.GetObject("boder", resourceCulture);
+                object obj = ResourceManager.GetObject("border", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

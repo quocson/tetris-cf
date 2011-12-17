@@ -140,8 +140,8 @@
     <None Include="Resources\next.png" />
     <None Include="Resources\piece.png" />
     <None Include="Resources\score.png" />
-    <None Include="Resources\boder.png" />
     <None Include="Resources\line.png" />
+    <None Include="Resources\border.png" />
     <Content Include="tetris.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />

@@ -23,7 +23,7 @@ namespace Tetris_Windows_Mobile
         public int Level
         {
             get { return level; }
-            set { level = value; }
+            set { level = value; drawLevel(); }
         }
 
         public void drawLevel()

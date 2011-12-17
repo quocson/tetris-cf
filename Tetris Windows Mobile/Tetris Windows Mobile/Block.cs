@@ -72,7 +72,7 @@ namespace Tetris_Windows_Mobile
 
         public void eraserBlock(Graphics gr)
         {
-            gr.DrawImage(Constant.iBoderGame,
+            gr.DrawImage(Constant.iBorderGame,
                          new Rectangle(xScreen, yScreen, Constant.d, Constant.d),
                          new Rectangle(xScreen, yScreen, Constant.d, Constant.d),
                          GraphicsUnit.Pixel);
