@@ -25,13 +25,14 @@ namespace Tetris_Windows_Mobile
             Shape tmpShape = new Shape(kind, color, rotate);
             int[,] tmpArr = tmpShape.getStatusArr(out r, out c);
 
+            imgBuff = new Bitmap(Constant.iNext);
             Graphics gr = Graphics.FromImage(imgBuff);
 
             if(r == 4 && c == 1)
             {
                 for (int i = 0; i < r; i++)
                 {
-                    Block tmp = new Block(0, 0, color);
+                    Block tmp = new Block(25, 30 + Constant.d * i, color);
                     tmp.drawBlock(gr);
                 }
             }
@@ -39,7 +40,7 @@ namespace Tetris_Windows_Mobile
             {
                 for (int i = 0; i < c; i++)
                 {
-                    Block tmp = new Block(0, 0, color);
+                    Block tmp = new Block(10 + Constant.d * i, 50, color);
                     tmp.drawBlock(gr);
                 }
             }
@@ -50,7 +51,7 @@ namespace Tetris_Windows_Mobile
                     {
                         if (tmpArr[i, j] == 1)
                         {
-                            Block tmp = new Block(0, 0,color);
+                            Block tmp = new Block(i * Constant.d + 22, j * Constant.d + 42,color);
                             tmp.drawBlock(gr);
                         }
                     }
@@ -62,7 +63,7 @@ namespace Tetris_Windows_Mobile
                     {
                         if (tmpArr[i, j] == 1)
                         {
-                            Block tmp = new Block(0, 0, color);
+                            Block tmp = new Block(j * Constant.d + 18, i * Constant.d + 44, color);
                             tmp.drawBlock(gr);
                         }
                     }
@@ -74,7 +75,7 @@ namespace Tetris_Windows_Mobile
                     {
                         if (tmpArr[i, j] == 1)
                         {
-                            Block tmp = new Block(0, 0, color);
+                            Block tmp = new Block(j * Constant.d + 22, i * Constant.d + 35, color);
                             tmp.drawBlock(gr);
                         }
                     }
