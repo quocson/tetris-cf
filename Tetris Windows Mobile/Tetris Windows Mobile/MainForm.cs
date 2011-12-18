@@ -27,6 +27,7 @@ namespace Tetris_Windows_Mobile
         private int tempScore;
         private bool bGhost;
         private bool bSound;
+        private PlaySound playSound;
         Stack<int> full;
 
         public MainForm()
@@ -49,6 +50,7 @@ namespace Tetris_Windows_Mobile
             bSound = true;
             tempScore = 0;
             full = new Stack<int>();
+            playSound = new PlaySound();
             changeMode(ModeGame.Ready);
         }
 
@@ -67,6 +69,8 @@ namespace Tetris_Windows_Mobile
             changeMode(ModeGame.New);
 
             timer.Enabled = true;
+            if (bSound)
+                playSound.playSoundTheme();
         }
 
         private void menuItem4_Click(object sender, EventArgs e)
