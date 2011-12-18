@@ -113,13 +113,6 @@ namespace Tetris_Windows_Mobile.Properties {
             }
         }
         
-        internal static byte[] gamestart {
-            get {
-                object obj = ResourceManager.GetObject("gamestart", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap level {
             get {
                 object obj = ResourceManager.GetObject("level", resourceCulture);
