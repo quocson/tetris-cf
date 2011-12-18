@@ -57,6 +57,13 @@ namespace Tetris_Windows_Mobile.Properties {
             }
         }
         
+        internal static byte[] amazing {
+            get {
+                object obj = ResourceManager.GetObject("amazing", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap arrow {
             get {
                 object obj = ResourceManager.GetObject("arrow", resourceCulture);
@@ -71,10 +78,45 @@ namespace Tetris_Windows_Mobile.Properties {
             }
         }
         
+        internal static byte[] brilliant {
+            get {
+                object obj = ResourceManager.GetObject("brilliant", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        internal static byte[] clear {
+            get {
+                object obj = ResourceManager.GetObject("clear", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap colors {
             get {
                 object obj = ResourceManager.GetObject("colors", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static byte[] excellent {
+            get {
+                object obj = ResourceManager.GetObject("excellent", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        internal static byte[] gameover {
+            get {
+                object obj = ResourceManager.GetObject("gameover", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        internal static byte[] gamestart {
+            get {
+                object obj = ResourceManager.GetObject("gamestart", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -85,10 +127,38 @@ namespace Tetris_Windows_Mobile.Properties {
             }
         }
         
+        internal static byte[] levelup {
+            get {
+                object obj = ResourceManager.GetObject("levelup", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap line {
             get {
                 object obj = ResourceManager.GetObject("line", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static byte[] lockdown {
+            get {
+                object obj = ResourceManager.GetObject("lockdown", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        internal static byte[] move {
+            get {
+                object obj = ResourceManager.GetObject("move", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        internal static byte[] movefast {
+            get {
+                object obj = ResourceManager.GetObject("movefast", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -113,10 +183,52 @@ namespace Tetris_Windows_Mobile.Properties {
             }
         }
         
+        internal static byte[] rotate {
+            get {
+                object obj = ResourceManager.GetObject("rotate", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        internal static byte[] rotatefail {
+            get {
+                object obj = ResourceManager.GetObject("rotatefail", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap score {
             get {
                 object obj = ResourceManager.GetObject("score", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static byte[] theme {
+            get {
+                object obj = ResourceManager.GetObject("theme", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        internal static byte[] verygood {
+            get {
+                object obj = ResourceManager.GetObject("verygood", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        internal static byte[] wonderfun {
+            get {
+                object obj = ResourceManager.GetObject("wonderfun", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        internal static byte[] wow {
+            get {
+                object obj = ResourceManager.GetObject("wow", resourceCulture);
+                return ((byte[])(obj));
             }
         }
     }
