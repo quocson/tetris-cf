@@ -110,11 +110,13 @@ namespace Tetris_Windows_Mobile
         public int yScreen
         {
             get { return y; }
+            set { y = value; }
         }
 
         public int xScreen
         {
             get { return x; }
+            set { x = value; }
         }
 
         public void drawShape(Graphics gr)
@@ -122,6 +124,14 @@ namespace Tetris_Windows_Mobile
             for (int i = 0; i < 4; i++)
             {
                 cube[i].drawBlock(gr);
+            }
+        }
+
+        public void drawGhostShape(Graphics gr)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                cube[i].drawGhostBlock(gr);
             }
         }
 
