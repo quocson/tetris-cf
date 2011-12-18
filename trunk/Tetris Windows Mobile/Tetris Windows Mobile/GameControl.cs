@@ -44,16 +44,8 @@ namespace Tetris_Windows_Mobile
         {
             Constant.resetMap();
             imageBuffer.Dispose();
-            imageBuffer = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.border);
+            imageBuffer = new Bitmap(Constant.iBorderGame);
             Refresh();
-        }
-
-        public void saveGame()
-        {
-        }
-
-        public void loadGame()
-        {
         }
 
         public void gameInitObj(out int k,out int c,out int ro)
@@ -147,6 +139,50 @@ namespace Tetris_Windows_Mobile
         {
             Graphics gr = Graphics.FromImage(imageBuffer);
             ghostShape.eraserShape(gr);
+            gr.Dispose();
+        }
+
+        public void keyDown(KeyEventArgs e, PlaySound sound, bool enableSound)
+        {
+            Graphics gr = Graphics.FromImage(imageBuffer);
+            shape.eraserShape(gr);
+            if (e.KeyValue == (int)System.Windows.Forms.Keys.Left && shape.canMoveLeft())
+            {
+                if (enableSound)
+                    sound.playSoundMove();
+                shape.moveLeft();
+            }
+            if (e.KeyValue == (int)System.Windows.Forms.Keys.Up && shape.canRotate())
+            {
+                if (enableSound)
+                    sound.playSoundRotate();
+                shape.rotate();
+            }
+            if (e.KeyValue == (int)System.Windows.Forms.Keys.Up && !shape.canRotate())
+            {
+                if (enableSound)
+                    sound.playSoundRotateFail();
+            }
+            if (e.KeyValue == (int)System.Windows.Forms.Keys.Right && shape.canMoveRight())
+            {
+                if (enableSound)
+                    sound.playSoundMove();
+                shape.moveRight();
+            }
+
+            if (e.KeyValue == (int)System.Windows.Forms.Keys.Down && shape.canFallDown())
+            {
+                if (enableSound)
+                    sound.playSoundMoveFast();
+                shape.fallDown();
+            }
+            if (e.KeyValue == (int)System.Windows.Forms.Keys.Enter && shape.canFallDown())
+            {
+                gameObjFallToEnd();
+                if (enableSound)
+                    sound.playSoundLockDown();
+            }
+            shape.drawShape(gr);
             gr.Dispose();
         }
 

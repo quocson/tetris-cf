@@ -50,7 +50,7 @@
             // 
             this.label1.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label1.Location = new System.Drawing.Point(30, 11);
+            this.label1.Location = new System.Drawing.Point(30, 38);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(180, 22);
             this.label1.Text = "Top 10 best recording:";
@@ -64,9 +64,9 @@
             this.listView1.ForeColor = System.Drawing.SystemColors.Highlight;
             this.listView1.FullRowSelect = true;
             this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.listView1.Location = new System.Drawing.Point(30, 49);
+            this.listView1.Location = new System.Drawing.Point(30, 80);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(180, 185);
+            this.listView1.Size = new System.Drawing.Size(180, 126);
             this.listView1.TabIndex = 1;
             this.listView1.View = System.Windows.Forms.View.Details;
             // 
