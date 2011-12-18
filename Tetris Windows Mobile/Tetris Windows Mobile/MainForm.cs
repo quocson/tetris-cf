@@ -24,6 +24,7 @@ namespace Tetris_Windows_Mobile
         private int shapeNext;
         private int colorNext;
         private int rotaterNext;
+        private int tempScore;
         private bool bGhost;
         private bool bSound;
         Stack<int> full;
@@ -46,6 +47,7 @@ namespace Tetris_Windows_Mobile
             Controls.Add(gamePiece);
             bGhost = true;
             bSound = true;
+            tempScore = 0;
             full = new Stack<int>();
             changeMode(ModeGame.Ready);
         }
@@ -143,10 +145,39 @@ namespace Tetris_Windows_Mobile
                             changeMode(ModeGame.Over);
                             return;
                         }
+                        // tinh diem
+                        int val, i = 0;
+                        bool isfull;
+                        // dem so line
+                        isfull = ((full = gameControl.fullLine()).Count > 0);
+
+                        if (isfull)
+                        {
+                            tempScore += (full.Count / 4) * 100;
+                            gameLine.Line += full.Count;
+                        }
+                        int c = 0;
+                        while (full.Count > 0)
+                        {
+                            //pop line + dxline (delete before)
+                            c++;
+                            tempScore = c * (Constant.yMax / Constant.d) * 20;
+                            val = full.Pop() + i;
+                            //========hieu ung
+                            //gameControl.EffectLine(val);
+                            Constant.updateMap(val, ref i);
+                        }
+                        gameScore.Score += tempScore;
+                        tempScore = 0;
+                        bool isWin = false;
+
+                        if (isWin)
+                            modeGame = ModeGame.Win;
                         else
                         {
-                            changeMode(ModeGame.New);
+                            modeGame = ModeGame.New;
                         }
+
                     }
                     break;
 
