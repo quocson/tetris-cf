@@ -17,7 +17,8 @@ namespace Tetris_Windows_Mobile
         {
             InitializeComponent();
             this.mainForm = mainForm;
-            connecting = new Connecting(listView1);
+            connecting = new Connecting();
+            connecting.readTable(listView1);
         }
 
         private void menuItem1_Click(object sender, EventArgs e)

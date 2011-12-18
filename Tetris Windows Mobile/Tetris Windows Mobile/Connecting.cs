@@ -9,34 +9,25 @@ using System.Windows.Forms;
 
 namespace Tetris_Windows_Mobile
 {
-    public class Constants
-    {
-
-        public static string connectionString = "Data Source=" + System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) + @"\TopScore.sdf; Password = 0912403";
-        public static string dbFilePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) + @"\TopScore.sdf";
-        public static string createSql = @"Create Table TopScore(Rank nvarchar(5) PRIMARY KEY , Score int NULL)";
-    }
-
     class Connecting
     {
         private SqlCeConnection con = null;
 
-        public Connecting(ListView l)
+        public Connecting()
         {
-            if (!System.IO.File.Exists(Constants.dbFilePath))
+            if (!System.IO.File.Exists(Constant.dbFilePath))
             {
-                SqlCeEngine eng = new SqlCeEngine(Constants.connectionString);
+                SqlCeEngine eng = new SqlCeEngine(Constant.connectionString);
 
                 eng.CreateDatabase();
 
                 createTable();
             }
-            readTable(l);
         }
 
         protected void openConnection()
         {
-            con = new SqlCeConnection(Constants.connectionString);
+            con = new SqlCeConnection(Constant.connectionString);
 
             con.Open();
         }
@@ -56,7 +47,7 @@ namespace Tetris_Windows_Mobile
 
             try
             {
-                using (SqlCeCommand cmdCreate = new SqlCeCommand(Constants.createSql, con))
+                using (SqlCeCommand cmdCreate = new SqlCeCommand(Constant.createSql, con))
                 {
                     cmdCreate.CommandType = System.Data.CommandType.Text;
 
@@ -79,7 +70,7 @@ namespace Tetris_Windows_Mobile
                 }
             }
 
-            for (int i = 1; i < 11; i++)
+            for (int i = 1; i < 6; i++)
                 insertNewScore(i.ToString() + ".", 0);
         }
 
@@ -182,7 +173,7 @@ namespace Tetris_Windows_Mobile
 
         public int[] getScores()
         {
-            int[] temp = new int[10];
+            int[] temp = new int[5];
             int i = 0;
             openConnection();
 
@@ -224,30 +215,30 @@ namespace Tetris_Windows_Mobile
         public int updateScore(int score)
         {
 
-            int[] temp = new int[10];
-            int rank = 10;
+            int[] temp = new int[5];
+            int rank = 5;
             temp = getScores();
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 5; i++)
                 if (score == temp[i])
                 {
-                    rank = 10;
-                    i = 10;
+                    rank = 5;
+                    i = 5;
                 }
                 else
                     if (score > temp[i])
                     {
                         rank = i;
-                        i = 10;
+                        i = 5;
                     }
-            if (rank < 10)
+            if (rank < 5)
             {
 
-                for (int i = 9; i > rank; i--)
+                for (int i = 4; i > rank; i--)
                     temp[i] = temp[i - 1];
 
                 temp[rank] = score;
-                for(int j = rank; j < 10; j++)
+                for(int j = rank; j < 5; j++)
                     editScore(j.ToString() + ".", temp[j]);
             }
             return rank;

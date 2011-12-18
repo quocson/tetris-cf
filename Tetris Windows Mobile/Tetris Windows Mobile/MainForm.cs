@@ -10,7 +10,7 @@ using System.Reflection;
 
 namespace Tetris_Windows_Mobile
 {
-    public enum ModeGame { Ready, Loading, New, Playing, CanFall, Paused, Over, Win };
+    public enum ModeGame { Ready, Loading, New, Playing, MenuFocus, Paused, Over, Win };
 
     public partial class MainForm : Form
     {
@@ -214,6 +214,8 @@ namespace Tetris_Windows_Mobile
         {
             playSound.stopSoundTheme();
             playSound.stopSoundPlayer();
+            //connecting.updateScore(gameScore.Score);
+            //save game (if dang choi).
             Application.Exit();
         }
 
@@ -229,6 +231,11 @@ namespace Tetris_Windows_Mobile
                 //gameControl.setGhostShape(gameControl.Kind, gameControl.Color, gameControl.Rotate, false);
                 bGhost = true;
             }
+        }
+
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            gameControl.keyDown(e, playSound, bSound);
         }
     }
 }
