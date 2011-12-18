@@ -70,6 +70,14 @@ namespace Tetris_Windows_Mobile
                          GraphicsUnit.Pixel);
         }
 
+        public void drawGhostBlock(Graphics gr)
+        {
+            gr.DrawImage(Constant.iColor,
+                         new Rectangle(xScreen, yScreen, Constant.d - 1, Constant.d - 1),
+                         new Rectangle((color - 1) * Constant.d, Constant.d, Constant.d, Constant.d),
+                         GraphicsUnit.Pixel);
+        }
+
         public void eraserBlock(Graphics gr)
         {
             gr.DrawImage(Constant.iBorderGame,

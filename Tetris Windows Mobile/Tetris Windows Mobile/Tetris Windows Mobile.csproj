@@ -97,6 +97,7 @@
     <Compile Include="NextShape.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="PlaySound.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="About.resx">

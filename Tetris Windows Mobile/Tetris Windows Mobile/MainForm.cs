@@ -24,6 +24,8 @@ namespace Tetris_Windows_Mobile
         private int shapeNext;
         private int colorNext;
         private int rotaterNext;
+        private bool bGhost;
+        private bool bSound;
         Stack<int> full;
 
         public MainForm()
@@ -42,6 +44,8 @@ namespace Tetris_Windows_Mobile
             Controls.Add(gameLevel);
             Controls.Add(gameLine);
             Controls.Add(gamePiece);
+            bGhost = true;
+            bSound = true;
             full = new Stack<int>();
             changeMode(ModeGame.Ready);
         }
@@ -57,11 +61,8 @@ namespace Tetris_Windows_Mobile
             gameLine.Line = 0;
             gamePiece.Piece = 0;
 
-            gameControl.gameInitObj(out  shapeNext, out  colorNext, out  rotaterNext);
-            gameControl.setShape(shapeNext, colorNext, rotaterNext);
-            nextShape.drawNextShape(shapeNext, colorNext, rotaterNext);
 
-            changeMode(ModeGame.Playing);
+            changeMode(ModeGame.New);
 
             timer.Enabled = true;
         }
@@ -122,9 +123,11 @@ namespace Tetris_Windows_Mobile
                 case ModeGame.Loading:
                     break;
 
-                case  ModeGame.New:
-                    gameControl.setShape(shapeNext, colorNext, rotaterNext);
+                case ModeGame.New:
                     gameControl.gameInitObj(out  shapeNext, out  colorNext, out  rotaterNext);
+                    if(bGhost)
+                        gameControl.setGhostShape(gameControl.Kind, gameControl.Color, gameControl.Rotate, false);
+                    gameControl.setShape(shapeNext, colorNext, rotaterNext);
                     nextShape.drawNextShape(shapeNext, colorNext, rotaterNext);
                     changeMode(ModeGame.Playing);
                     break;
@@ -166,6 +169,20 @@ namespace Tetris_Windows_Mobile
         private void menuItem5_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void menuItem9_Click(object sender, EventArgs e)
+        {
+            if (bGhost)
+            {
+                //gameControl.eraserGhostShape();
+                bGhost = false;
+            }
+            else
+            {
+                //gameControl.setGhostShape(gameControl.Kind, gameControl.Color, gameControl.Rotate, false);
+                bGhost = true;
+            }
         }
     }
 }

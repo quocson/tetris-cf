@@ -98,6 +98,7 @@
             // menuItem9
             // 
             this.menuItem9.Text = "Ghost";
+            this.menuItem9.Click += new System.EventHandler(this.menuItem9_Click);
             // 
             // menuItem5
             // 

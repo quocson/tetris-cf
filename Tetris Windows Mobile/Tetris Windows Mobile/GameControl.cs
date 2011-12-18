@@ -10,6 +10,7 @@ namespace Tetris_Windows_Mobile
     class GameControl:Panel
     {
         private Shape shape;
+        private Shape ghostShape;
         private Bitmap imageBuffer;
         private int indexShape;
         private int color;
@@ -21,6 +22,22 @@ namespace Tetris_Windows_Mobile
             Size = new Size(170, 294);
             imageBuffer = new Bitmap(Constant.iBorderGame);
             indexShape = Constant.randShape(out color, out indexRotate);
+            ghostShape = new Shape(indexShape, color, indexRotate);
+        }
+
+        public int Kind
+        {
+            get { return indexShape; }
+        }
+
+        public int Color
+        {
+            get { return color; }
+        }
+
+        public int Rotate
+        {
+            get { return indexRotate; }
         }
 
         public void resetGame()
@@ -104,10 +121,33 @@ namespace Tetris_Windows_Mobile
             return shape.checkFullLine();
         }
 
-        public void ClearScreen()
+        public void clearScreen()
         {
             imageBuffer.Dispose();
-            imageBuffer = Tetris_Windows_Mobile.Properties.Resources.border;
+            imageBuffer = Constant.iBorderGame;
+        }
+
+        public void setGhostShape(int kind, int color, int rotate, bool stt)
+        {
+            Graphics gr = Graphics.FromImage(imageBuffer);
+            if(stt)
+                ghostShape.eraserShape(gr);
+            ghostShape = new Shape(kind, color, rotate);
+            ghostShape.xScreen = shape.xScreen;
+            ghostShape.yScreen = shape.yScreen;
+            while (ghostShape.canFallDown())
+            {
+                ghostShape.fallDown();
+            }
+            ghostShape.drawGhostShape(gr);
+            gr.Dispose();
+        }
+
+        public void eraserGhostShape()
+        {
+            Graphics gr = Graphics.FromImage(imageBuffer);
+            ghostShape.eraserShape(gr);
+            gr.Dispose();
         }
 
         protected override void OnPaint(PaintEventArgs e)
