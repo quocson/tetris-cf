@@ -198,11 +198,22 @@ namespace Tetris_Windows_Mobile
 
         private void menuItem10_Click(object sender, EventArgs e)
         {
-            
+            if (bSound)
+            {
+                playSound.stopSoundTheme();
+                bSound = false;
+            }
+            else
+            {
+                playSound.playSoundTheme();
+                bSound = true;
+            }
         }
 
         private void menuItem5_Click(object sender, EventArgs e)
         {
+            playSound.stopSoundTheme();
+            playSound.stopSoundPlayer();
             Application.Exit();
         }
 
