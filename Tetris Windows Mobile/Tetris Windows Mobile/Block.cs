@@ -88,7 +88,7 @@ namespace Tetris_Windows_Mobile
 
         public bool rightPosition()
         {
-            if (xScreen < 0 || xScreen > Constant.xMax *  Constant.d - Constant.d) 
+            if (xScreen < 0 || xScreen > Constant.yMax *  Constant.d - Constant.d) 
                 return false;
 
             if (yScreen <= -Constant.d) 
@@ -96,7 +96,7 @@ namespace Tetris_Windows_Mobile
 
             if (yScreen > -Constant.d && yScreen < 0 && Constant.map[yScreen / Constant.d + 1, xScreen / Constant.d] == 0)
                 return true;
-
+            
             if (yScreen >= 0)
             {
                 if (Constant.onMap(yScreen / Constant.d, xScreen / Constant.d) && yScreen % Constant.d == 0 && Constant.map[yScreen / Constant.d, xScreen / Constant.d] == 0) 
@@ -127,7 +127,7 @@ namespace Tetris_Windows_Mobile
 
                 return false;
             }
-            if (currX < Constant.xMax - 1 && yScreen >= 0 && Constant.map[currX + 1, currY] == 0)
+            if (currX < Constant.xMax - 2 && yScreen >= 0 && Constant.map[currX + 1, currY] == 0)
                 return true;
             return false;
         }
@@ -139,7 +139,7 @@ namespace Tetris_Windows_Mobile
 
         public void moveRight()
         {
-            yScreen += Constant.d;
+            xScreen += Constant.d;
         }
 
         public void moveDown()

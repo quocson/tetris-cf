@@ -60,7 +60,7 @@ namespace Tetris_Windows_Mobile
 
             gameControl.resetGame();
 
-            gameScore.Score = 0;
+            gameScore.Score = 900;
             gameLevel.Level = 1;
             gameLine.Line = 0;
             gamePiece.Piece = 0;
@@ -131,13 +131,12 @@ namespace Tetris_Windows_Mobile
 
                 case ModeGame.New:
                     gameControl.gameInitObj(out  shapeNext, out  colorNext, out  rotaterNext);
-                    if(bGhost)
-                        gameControl.setGhostShape(gameControl.Kind, gameControl.Color, gameControl.Rotate, false);
                     gameControl.setShape(shapeNext, colorNext, rotaterNext);
                     nextShape.drawNextShape(shapeNext, colorNext, rotaterNext);
                     changeMode(ModeGame.Playing);
+                    gamePiece.Piece++;
                     break;
-
+                    
                 case  ModeGame.Playing:
                     gameControl.drawPanel();
                     if  (!gameControl.gameObjFall())
@@ -149,37 +148,37 @@ namespace Tetris_Windows_Mobile
                             changeMode(ModeGame.Over);
                             return;
                         }
-                        // tinh diem
                         int val, i = 0;
                         bool isfull;
-                        // dem so line
                         isfull = ((full = gameControl.fullLine()).Count > 0);
 
-                        if (isfull)
-                        {
-                            tempScore += (full.Count / 4) * 100;
-                            gameLine.Line += full.Count;
-                        }
+                       
+                        tempScore += (full.Count / 4) * 100;
+                        gameLine.Line += full.Count;
                         int c = 0;
                         while (full.Count > 0)
                         {
-                            //pop line + dxline (delete before)
                             c++;
-                            tempScore = c * (Constant.yMax / Constant.d) * 20;
+                            tempScore += c * (Constant.yMax / Constant.d) * 20;
                             val = full.Pop() + i;
-                            //========hieu ung
-                            //gameControl.EffectLine(val);
+                            gameControl.deleteLine(val);
                             Constant.updateMap(val, ref i);
                         }
                         gameScore.Score += tempScore;
                         tempScore = 0;
-                        bool isWin = false;
+                        if (gameScore.Score > gameLevel.Level * gameLevel.Level * 999)
+                        {
+                            gameLevel.Level++;
+                            Constant.speedGame = 1000 - (gameLevel.Level / 10 * 100);
+                            gameControl.resetGame();
+                        }
+                        
 
-                        if (isWin)
-                            modeGame = ModeGame.Win;
+                        if (gameLevel.Level == 99)
+                           changeMode(ModeGame.Win);
                         else
                         {
-                            modeGame = ModeGame.New;
+                            changeMode( ModeGame.New);
                         }
 
                     }
@@ -235,7 +234,9 @@ namespace Tetris_Windows_Mobile
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
-            gameControl.keyDown(e, playSound, bSound);
+            int temp = 0;
+            gameControl.keyDown(e, playSound, bSound, ref temp);
+            gameScore.Score += temp;
         }
     }
 }

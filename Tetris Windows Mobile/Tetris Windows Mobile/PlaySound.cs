@@ -16,7 +16,6 @@ namespace Tetris_Windows_Mobile
         public PlaySound()
         {
             player = new SoundPlayer();
-
             a = System.Reflection.Assembly.GetExecutingAssembly();
             s = a.GetManifestResourceStream("Tetris_Windows_Mobile.Resources.theme.wav");
             theme = new SoundPlayer(s);
@@ -27,12 +26,12 @@ namespace Tetris_Windows_Mobile
             try
             {
                 theme.LoadAsync();
+                theme.PlayLooping();
             }
             catch (Exception )
             {
                 
             }
-            theme.PlayLooping();
         }
 
         public void stopSoundTheme()
@@ -161,22 +160,6 @@ namespace Tetris_Windows_Mobile
         {
             player.Dispose();
             s = a.GetManifestResourceStream("Tetris_Windows_Mobile.Resources.move.wav");
-            player = new SoundPlayer(s);
-            try
-            {
-                player.LoadAsync();
-            }
-            catch (Exception )
-            {
-                
-            }
-            player.PlaySync();
-        }
-
-        public void playSoundMoveFast()
-        {
-            player.Dispose();
-            s = a.GetManifestResourceStream("Tetris_Windows_Mobile.Resources.movefast.wav");
             player = new SoundPlayer(s);
             try
             {

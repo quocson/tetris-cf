@@ -34,3 +34,15 @@ C:\Users\HuuTai_it\Desktop\Tetris CF\Tetris Windows Mobile\Tetris Windows Mobile
 C:\Users\HuuTai_it\Desktop\Tetris CF\Tetris Windows Mobile\Tetris Windows Mobile\bin\Debug\Tetris Windows Mobile.exe
 C:\Users\HuuTai_it\Desktop\Tetris CF\Tetris Windows Mobile\Tetris Windows Mobile\bin\Debug\Tetris Windows Mobile.pdb
 C:\Users\HuuTai_it\Desktop\Tetris CF\Tetris Windows Mobile\Tetris Windows Mobile\bin\Debug\System.Data.SqlServerCe.dll
+C:\Users\HuuTai_it\Desktop\fuck\Tetris Windows Mobile\Tetris Windows Mobile\bin\Debug\Tetris Windows Mobile.exe
+C:\Users\HuuTai_it\Desktop\fuck\Tetris Windows Mobile\Tetris Windows Mobile\bin\Debug\Tetris Windows Mobile.pdb
+C:\Users\HuuTai_it\Desktop\fuck\Tetris Windows Mobile\Tetris Windows Mobile\bin\Debug\System.Data.SqlServerCe.dll
+C:\Users\HuuTai_it\Desktop\fuck\Tetris Windows Mobile\Tetris Windows Mobile\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\HuuTai_it\Desktop\fuck\Tetris Windows Mobile\Tetris Windows Mobile\obj\Debug\Tetris_Windows_Mobile.About.resources
+C:\Users\HuuTai_it\Desktop\fuck\Tetris Windows Mobile\Tetris Windows Mobile\obj\Debug\Tetris_Windows_Mobile.Help.resources
+C:\Users\HuuTai_it\Desktop\fuck\Tetris Windows Mobile\Tetris Windows Mobile\obj\Debug\Tetris_Windows_Mobile.MainForm.resources
+C:\Users\HuuTai_it\Desktop\fuck\Tetris Windows Mobile\Tetris Windows Mobile\obj\Debug\Tetris_Windows_Mobile.Properties.Resources.resources
+C:\Users\HuuTai_it\Desktop\fuck\Tetris Windows Mobile\Tetris Windows Mobile\obj\Debug\Tetris_Windows_Mobile.TopScores.resources
+C:\Users\HuuTai_it\Desktop\fuck\Tetris Windows Mobile\Tetris Windows Mobile\obj\Debug\Tetris Windows Mobile.csproj.GenerateResource.Cache
+C:\Users\HuuTai_it\Desktop\fuck\Tetris Windows Mobile\Tetris Windows Mobile\obj\Debug\Tetris Windows Mobile.exe
+C:\Users\HuuTai_it\Desktop\fuck\Tetris Windows Mobile\Tetris Windows Mobile\obj\Debug\Tetris Windows Mobile.pdb
