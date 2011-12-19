@@ -29,11 +29,11 @@ namespace Tetris_Windows_Mobile
 
         static Constant()
         {
-            xMax = 18;
-            yMax = 12;
+            xMax = 19;
+            yMax = 13;
             map = new int[xMax, yMax];
-            startXscreen = 70;
-            speedGame = 100;
+            startXscreen = 65;
+            speedGame = 799;
             iBorderGame = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.border);
             iNext = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.next);
             iScore = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.score);

@@ -22,22 +22,11 @@ namespace Tetris_Windows_Mobile
             Size = new Size(170, 294);
             imageBuffer = new Bitmap(Constant.iBorderGame);
             indexShape = Constant.randShape(out color, out indexRotate);
-            ghostShape = new Shape(indexShape, color, indexRotate);
         }
 
-        public int Kind
+        public Shape Shape
         {
-            get { return indexShape; }
-        }
-
-        public int Color
-        {
-            get { return color; }
-        }
-
-        public int Rotate
-        {
-            get { return indexRotate; }
+            get { return shape; }
         }
 
         public void resetGame()
@@ -88,6 +77,9 @@ namespace Tetris_Windows_Mobile
                 Graphics gr = Graphics.FromImage(imageBuffer);
                 shape.eraserShape(gr);
                 shape.fallDown();
+                ghostShape = new Shape(shape.Kind, shape.Color, shape.Rotate, shape.xScreen, shape.yScreen);
+                ghostShape.goToEnd();
+                ghostShape.drawGhostShape(gr);
                 shape.drawShape(gr);
                 gr.Dispose();
                 return true;
@@ -102,10 +94,7 @@ namespace Tetris_Windows_Mobile
 
         void gameObjFallToEnd()
         {
-            while (shape.canFallDown())
-            {
-                shape.fallDown();
-            }
+            shape.goToEnd();
         }
 
         public Stack<int> fullLine()
@@ -119,70 +108,80 @@ namespace Tetris_Windows_Mobile
             imageBuffer = Constant.iBorderGame;
         }
 
-        public void setGhostShape(int kind, int color, int rotate, bool stt)
+        public void deleteLine(int line)
         {
-            Graphics gr = Graphics.FromImage(imageBuffer);
-            if(stt)
-                ghostShape.eraserShape(gr);
-            ghostShape = new Shape(kind, color, rotate);
-            ghostShape.xScreen = shape.xScreen;
-            ghostShape.yScreen = shape.yScreen;
-            while (ghostShape.canFallDown())
-            {
-                ghostShape.fallDown();
-            }
-            ghostShape.drawGhostShape(gr);
-            gr.Dispose();
+            Graphics g = Graphics.FromImage(imageBuffer);
+            g.DrawImage(Constant.iBorderGame, new Rectangle(0, 0, Constant.yMax * Constant.d, (line + 2) * Constant.d - 2),
+                new Rectangle(0, 0, Constant.yMax * Constant.d, (line + 2) * Constant.d - 2), GraphicsUnit.Pixel);
+            Refresh();
+            for (int i = line  - 1; i >= 0; i--)
+                for (int j = 0; j < Constant.yMax; j++) 
+                {
+                    
+                    if (Constant.map[i, j] != 0)
+                    {
+                        g.DrawImage(Constant.iColor,
+                        new Rectangle(j * Constant.d, (i + 2) * Constant.d - 2, Constant.d - 1, Constant.d - 1),
+                        new Rectangle((Constant.map[i, j] - 1) * Constant.d, 0, Constant.d, Constant.d),
+                        GraphicsUnit.Pixel);
+                        Refresh();
+                    }
+                }
+            g.Dispose();
         }
 
-        public void eraserGhostShape()
-        {
-            Graphics gr = Graphics.FromImage(imageBuffer);
-            ghostShape.eraserShape(gr);
-            gr.Dispose();
-        }
-
-        public void keyDown(KeyEventArgs e, PlaySound sound, bool enableSound)
+        public void keyDown(KeyEventArgs e, PlaySound sound, bool enableSound, ref int tempScore)
         {
             Graphics gr = Graphics.FromImage(imageBuffer);
             shape.eraserShape(gr);
+            ghostShape.eraserShape(gr);
             if (e.KeyValue == (int)System.Windows.Forms.Keys.Left && shape.canMoveLeft())
             {
-                if (enableSound)
-                    sound.playSoundMove();
                 shape.moveLeft();
+                if (!enableSound)
+                    sound.playSoundMove();
             }
             if (e.KeyValue == (int)System.Windows.Forms.Keys.Up && shape.canRotate())
             {
-                if (enableSound)
-                    sound.playSoundRotate();
                 shape.rotate();
+                if (!enableSound)
+                    sound.playSoundRotate();
             }
             if (e.KeyValue == (int)System.Windows.Forms.Keys.Up && !shape.canRotate())
             {
-                if (enableSound)
+                if (!enableSound)
                     sound.playSoundRotateFail();
             }
             if (e.KeyValue == (int)System.Windows.Forms.Keys.Right && shape.canMoveRight())
             {
-                if (enableSound)
-                    sound.playSoundMove();
                 shape.moveRight();
+                if (!enableSound)
+                    sound.playSoundMove();
             }
 
             if (e.KeyValue == (int)System.Windows.Forms.Keys.Down && shape.canFallDown())
             {
-                if (enableSound)
-                    sound.playSoundMoveFast();
                 shape.fallDown();
+                tempScore += 2;
+            }
+
+            if (e.KeyValue == (int)System.Windows.Forms.Keys.Down && !shape.canFallDown())
+            {
+                if (!enableSound)
+                    sound.playSoundLockDown();
             }
             if (e.KeyValue == (int)System.Windows.Forms.Keys.Enter && shape.canFallDown())
             {
                 gameObjFallToEnd();
-                if (enableSound)
+                if (!enableSound)
                     sound.playSoundLockDown();
+                tempScore += 10;
             }
+            ghostShape = new Shape(shape.Kind, shape.Color, shape.Rotate, shape.xScreen, shape.yScreen);
+            ghostShape.goToEnd();
+            ghostShape.drawGhostShape(gr);
             shape.drawShape(gr);
+            Refresh();
             gr.Dispose();
         }
 

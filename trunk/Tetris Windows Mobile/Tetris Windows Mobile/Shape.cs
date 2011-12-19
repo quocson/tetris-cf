@@ -14,12 +14,14 @@ namespace Tetris_Windows_Mobile
         private Block[] cube;
         public int color;
         private int countRotate;
+        private int kind;
 
         public Shape(int kind, int color, int rotater)
         {
             int i, j, index;
 
             this.color = color;
+            this.kind = kind;
             countRotate = rotater;
 
             statusArr = new int[4, 4];
@@ -70,7 +72,6 @@ namespace Tetris_Windows_Mobile
             if (countRotate == 1 || countRotate == 3)
                 if (kind == 15)
                     y = -15;
-                else
                     if (kind == 57 || kind == 60)
                         y = -54;
 
@@ -84,6 +85,67 @@ namespace Tetris_Windows_Mobile
                     }
                 }
         }
+
+        public Shape(int kind, int color, int rotater, int x, int y)
+        {
+            int i, j, index;
+
+            this.color = color;
+            this.kind = kind;
+            countRotate = rotater;
+            this.x = x;
+            this.y = y;
+
+            statusArr = new int[4, 4];
+            cube = new Block[4];
+            for (i = 0; i < 4; i++)
+                for (j = 0; j < 4; j++)
+                {
+                    statusArr[i, j] = 0;
+                }
+
+            switch (kind)
+            {
+                case 15:
+                    row = 4; col = 1;
+                    for (i = 0; i < row; i++)
+                        statusArr[i, 0] = 1;
+                    break;
+
+                case 31:
+                    row = col = 2;
+                    for (i = 0; i < row; i++)
+                        for (j = 0; j < col; j++)
+                            statusArr[i, j] = 1;
+                    break;
+
+                default:
+                    row = 2;
+                    col = 3;
+                    for (i = 0; i < row * col; i++)
+                    {
+                        statusArr[i / 3, i % 3] = (kind >> (5 - i)) & 1;
+                    }
+                    break;
+            }
+
+            for (i = 0; i < countRotate; i++)
+            {
+                if (row != col)
+                    rotateArr();
+            }
+
+            index = 0;
+            for (i = 0; i < row; i++)
+                for (j = 0; j < col; j++)
+                {
+                    if (statusArr[i, j] == 1)
+                    {
+                        cube[index++] = new Block(x + j * Constant.d, y + i * Constant.d, color);
+                    }
+                }
+        }
+
 
         public void Dispose()
         {
@@ -119,12 +181,36 @@ namespace Tetris_Windows_Mobile
             set { x = value; }
         }
 
+        public int Kind
+        {
+            get { return kind; }
+            set { kind = value; }
+        }
+
+        public int Color
+        {
+            get { return color; }
+            set { color = value; }
+        }
+
+        public int Rotate
+        {
+            get { return countRotate; }
+            set { countRotate = value; }
+        }
+
         public void drawShape(Graphics gr)
         {
             for (int i = 0; i < 4; i++)
             {
                 cube[i].drawBlock(gr);
             }
+        }
+
+        public void goToEnd()
+        {
+            while (canFallDown())
+                fallDown();
         }
 
         public void drawGhostShape(Graphics gr)
@@ -300,6 +386,8 @@ namespace Tetris_Windows_Mobile
 
         public void rotate()
         {
+            if (countRotate++ > 2)
+                countRotate = 0;
             int i, j;
             int tmpRow = col;
             int tmpCol = row;

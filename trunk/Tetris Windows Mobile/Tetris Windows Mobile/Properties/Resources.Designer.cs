@@ -148,13 +148,6 @@ namespace Tetris_Windows_Mobile.Properties {
             }
         }
         
-        internal static byte[] movefast {
-            get {
-                object obj = ResourceManager.GetObject("movefast", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap next {
             get {
                 object obj = ResourceManager.GetObject("next", resourceCulture);
