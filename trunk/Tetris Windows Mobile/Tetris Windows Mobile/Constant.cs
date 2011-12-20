@@ -29,7 +29,7 @@ namespace Tetris_Windows_Mobile
 
         static Constant()
         {
-            xMax = 19;
+            xMax = 23;
             yMax = 13;
             map = new int[xMax, yMax];
             startXscreen = 65;
@@ -75,11 +75,8 @@ namespace Tetris_Windows_Mobile
             for (i = rol; i >= 0; i--)
                 for (j = 0; j < yMax; j++)
                 {
-                    if (i == 0)
-                    {
-                        map[i, j] = 0;
-                    }
-                    else   map[i, j] = map[i - 1, j];
+                    if (i != 0)
+                     map[i, j] = map[i - 1, j];
                 }
             dxLine++;
         }

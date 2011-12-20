@@ -49,12 +49,12 @@ namespace Tetris_Windows_Mobile
 
         public Point positionArr()
         {
-            return new Point(yScreen / Constant.d, xScreen / Constant.d);
+            return new Point((yScreen + 52) / Constant.d, xScreen / Constant.d);
         }
 
         public void lockedArr()
         {
-            int i = yScreen / Constant.d;
+            int i = (yScreen + 52) / Constant.d;
             int j = xScreen / Constant.d;
             if (Constant.onMap(i, j))
             {
@@ -88,26 +88,10 @@ namespace Tetris_Windows_Mobile
 
         public bool rightPosition()
         {
-            if (xScreen < 0 || xScreen > Constant.yMax *  Constant.d - Constant.d) 
-                return false;
-
-            if (yScreen <= -Constant.d) 
+            if ((xScreen >= 0 && xScreen <= Constant.yMax *  Constant.d - Constant.d) &&
+                yScreen <= Constant.xMax * Constant.d - 5 * Constant.d &&
+                Constant.map[(yScreen + 52) / Constant.d, xScreen / Constant.d] == 0) 
                 return true;
-
-            if (yScreen > -Constant.d && yScreen < 0 && Constant.map[yScreen / Constant.d + 1, xScreen / Constant.d] == 0)
-                return true;
-            
-            if (yScreen >= 0)
-            {
-                if (Constant.onMap(yScreen / Constant.d, xScreen / Constant.d) && yScreen % Constant.d == 0 && Constant.map[yScreen / Constant.d, xScreen / Constant.d] == 0) 
-                    return true;
-
-                if (yScreen % Constant.d != 0 && Constant.onMap(yScreen / Constant.d, xScreen / Constant.d) && Constant.onMap(yScreen / Constant.d + 1, xScreen / Constant.d) &&
-                    Constant.map[yScreen / Constant.d, xScreen / Constant.d] == 0 && Constant.map[yScreen / Constant.d + 1, xScreen / Constant.d] == 0)
-                    return true;
-
-                return false;
-            }
 
             return false;
 
@@ -117,17 +101,8 @@ namespace Tetris_Windows_Mobile
         {
             int currX = positionArr().X;
             int currY = positionArr().Y;
-            if (yScreen < 0)
-            {
-                if (yScreen >= -Constant.d && Constant.map[0, currY] == 0) 
-                    return true;
-
-                if (yScreen < -Constant.d) 
-                    return true;
-
-                return false;
-            }
-            if (currX < Constant.xMax - 2 && yScreen >= 0 && Constant.map[currX + 1, currY] == 0)
+            if (yScreen <= Constant.xMax * Constant.d - 6 * Constant.d &&
+                Constant.map[currX + 1, currY] == 0)
                 return true;
             return false;
         }

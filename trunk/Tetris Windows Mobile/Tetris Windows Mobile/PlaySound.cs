@@ -140,22 +140,6 @@ namespace Tetris_Windows_Mobile
             player.PlaySync();
         }
 
-        public void playSoundLockDown()
-        {
-            player.Dispose();
-            s = a.GetManifestResourceStream("Tetris_Windows_Mobile.Resources.lockdown.wav");
-            player = new SoundPlayer(s);
-            try
-            {
-                player.LoadAsync();
-            }
-            catch (Exception )
-            {
-                
-            }
-            player.PlaySync();
-        }
-
         public void playSoundMove()
         {
             player.Dispose();

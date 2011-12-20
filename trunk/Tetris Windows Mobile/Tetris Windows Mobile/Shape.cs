@@ -37,7 +37,7 @@ namespace Tetris_Windows_Mobile
                 case 15:
                     row = 4; col = 1;
                     x = Constant.startXscreen;
-                    y = -54;
+                    y = -52;
                     for (i = 0; i < row; i++)
                         statusArr[i, 0] = 1;
                     break;
@@ -45,7 +45,7 @@ namespace Tetris_Windows_Mobile
                 case 31:
                     row = col = 2;
                     x = Constant.startXscreen;
-                    y = -28;
+                    y = -26;
                     for (i = 0; i < row; i++)
                         for (j = 0; j < col; j++)
                             statusArr[i, j] = 1;
@@ -55,7 +55,7 @@ namespace Tetris_Windows_Mobile
                     row = 2;
                     col = 3;
                     x = Constant.startXscreen;
-                    y = -28;
+                    y = -26;
                     for (i = 0; i < row * col; i++)
                     {
                         statusArr[i / 3, i % 3] = (kind >> (5 - i)) & 1;
@@ -71,9 +71,9 @@ namespace Tetris_Windows_Mobile
 
             if (countRotate == 1 || countRotate == 3)
                 if (kind == 15)
-                    y = -15;
+                    y = -13;
                     if (kind == 57 || kind == 60)
-                        y = -54;
+                        y = -52;
 
             index = 0;
             for (i = 0; i < row; i++)
@@ -86,58 +86,23 @@ namespace Tetris_Windows_Mobile
                 }
         }
 
-        public Shape(int kind, int color, int rotater, int x, int y)
+        public Shape(int[,] stt, int color, int x, int y, int r,int c)
         {
-            int i, j, index;
-
-            this.color = color;
-            this.kind = kind;
-            countRotate = rotater;
             this.x = x;
             this.y = y;
-
+            row = r;
+            col = c;
+            this.color = color;
             statusArr = new int[4, 4];
             cube = new Block[4];
-            for (i = 0; i < 4; i++)
-                for (j = 0; j < 4; j++)
+            for (int i = 0; i < 4; i++)
+                for (int j = 0; j < 4; j++)
                 {
-                    statusArr[i, j] = 0;
+                    statusArr[i, j] = stt[i, j];
                 }
-
-            switch (kind)
-            {
-                case 15:
-                    row = 4; col = 1;
-                    for (i = 0; i < row; i++)
-                        statusArr[i, 0] = 1;
-                    break;
-
-                case 31:
-                    row = col = 2;
-                    for (i = 0; i < row; i++)
-                        for (j = 0; j < col; j++)
-                            statusArr[i, j] = 1;
-                    break;
-
-                default:
-                    row = 2;
-                    col = 3;
-                    for (i = 0; i < row * col; i++)
-                    {
-                        statusArr[i / 3, i % 3] = (kind >> (5 - i)) & 1;
-                    }
-                    break;
-            }
-
-            for (i = 0; i < countRotate; i++)
-            {
-                if (row != col)
-                    rotateArr();
-            }
-
-            index = 0;
-            for (i = 0; i < row; i++)
-                for (j = 0; j < col; j++)
+            int index = 0;
+            for (int i = 0; i < row; i++)
+                for (int j = 0; j < col; j++)
                 {
                     if (statusArr[i, j] == 1)
                     {
@@ -193,10 +158,27 @@ namespace Tetris_Windows_Mobile
             set { color = value; }
         }
 
+        public int Row
+        {
+            get { return row; }
+            set { row = value; }
+        }
+
+        public int Col
+        {
+            get { return col; }
+            set { col = value; }
+        }
+
         public int Rotate
         {
             get { return countRotate; }
             set { countRotate = value; }
+        }
+
+        public int[,] StatusArr
+        {
+            get { return statusArr; }
         }
 
         public void drawShape(Graphics gr)
@@ -231,7 +213,7 @@ namespace Tetris_Windows_Mobile
 
         public bool canMoveLeft()
         {
-            if (x < Constant.d || (y + Constant.d * row) == 0) 
+            if (x < Constant.d || y > (Constant.xMax - 5) * Constant.d) 
                 return false;
 
             int tmpX = x - Constant.d;
@@ -253,7 +235,7 @@ namespace Tetris_Windows_Mobile
 
         public bool canMoveRight()
         {
-            if (x > Constant.xMax * Constant.d - Constant.d || (y + Constant.d * row) == 0) 
+            if (x > Constant.xMax * Constant.d - Constant.d || y > (Constant.xMax - 5) * Constant.d) 
                 return false;
 
             int tmpX = x + Constant.d;
@@ -386,8 +368,6 @@ namespace Tetris_Windows_Mobile
 
         public void rotate()
         {
-            if (countRotate++ > 2)
-                countRotate = 0;
             int i, j;
             int tmpRow = col;
             int tmpCol = row;
@@ -399,7 +379,6 @@ namespace Tetris_Windows_Mobile
                 }
             if (!canRotate()) 
                 return;
-            if (y < 0) return;
 
             row = tmpRow;
             col = tmpCol;
@@ -428,7 +407,7 @@ namespace Tetris_Windows_Mobile
         public Stack<int> checkFullLine()
         {
             Stack<int> fullLine = new Stack<int>();
-            int rootLine = y / Constant.d;
+            int rootLine = y / Constant.d + 4;//wtf ong cong them 4 ma
             int dxLine = row;
             int i, j, counter;
             for (i = rootLine; i < rootLine + dxLine; i++)

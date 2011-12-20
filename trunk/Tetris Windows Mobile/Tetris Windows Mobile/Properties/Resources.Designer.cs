@@ -134,13 +134,6 @@ namespace Tetris_Windows_Mobile.Properties {
             }
         }
         
-        internal static byte[] lockdown {
-            get {
-                object obj = ResourceManager.GetObject("lockdown", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
         internal static byte[] move {
             get {
                 object obj = ResourceManager.GetObject("move", resourceCulture);
