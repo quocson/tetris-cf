@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Tetris_Windows_Mobile
 {
-    class GameControl:Panel
+    class GameControl : Panel
     {
         private Shape shape;
         private Shape ghostShape;
@@ -25,6 +25,17 @@ namespace Tetris_Windows_Mobile
             indexShape = Constant.randShape(out color, out indexRotate);
             ghostShape = null;
             shape = null;
+        }
+
+        public void destroy()
+        {
+            if(shape != null)
+                shape.Dispose();
+            if(ghostShape != null)
+            ghostShape.Dispose();
+            imageBuffer.Dispose();
+            Dispose();
+            GC.SuppressFinalize(this);
         }
 
         public Shape Shape

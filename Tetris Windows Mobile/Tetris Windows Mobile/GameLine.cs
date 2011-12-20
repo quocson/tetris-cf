@@ -20,6 +20,13 @@ namespace Tetris_Windows_Mobile
             imgBuff = new Bitmap(Constant.iLine);
         }
 
+        public void destroy()
+        {
+            imgBuff.Dispose();
+            Dispose();
+            GC.SuppressFinalize(this);
+        }
+
         public int Line
         {
             get { return line; }

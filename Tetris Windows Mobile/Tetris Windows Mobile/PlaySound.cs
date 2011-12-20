@@ -7,7 +7,7 @@ using System.Media;
 
 namespace Tetris_Windows_Mobile
 {
-    class PlaySound
+    class PlaySound : IDisposable
     {
         private SoundPlayer player;
         private SoundPlayer theme;
@@ -32,6 +32,13 @@ namespace Tetris_Windows_Mobile
             {
                 
             }
+        }
+
+        public void Dispose()
+        {
+            player.Dispose();
+            theme.Dispose();
+            GC.SuppressFinalize(this);
         }
 
         public void stopSoundTheme()

@@ -87,6 +87,7 @@
             // 
             // menuItem2
             // 
+            this.menuItem2.Enabled = false;
             this.menuItem2.Text = "Pause";
             this.menuItem2.Click += new System.EventHandler(this.menuItem2_Click);
             // 

@@ -29,7 +29,7 @@ namespace Tetris_Windows_Mobile
 
         static Constant()
         {
-            xMax = 23;
+            xMax = 24;
             yMax = 13;
             map = new int[xMax, yMax];
             startXscreen = 65;
