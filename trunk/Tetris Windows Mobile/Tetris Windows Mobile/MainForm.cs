@@ -27,6 +27,7 @@ namespace Tetris_Windows_Mobile
         private int tempScore;
         private bool bGhost;
         private bool bSound;
+        public bool bPause;
         private PlaySound playSound;
         Stack<int> full;
         
@@ -49,6 +50,7 @@ namespace Tetris_Windows_Mobile
             Controls.Add(gamePiece);
             bGhost = true;
             bSound = true;
+            bPause = false;
             tempScore = 0;
             full = new Stack<int>();
             playSound = new PlaySound();
@@ -72,8 +74,6 @@ namespace Tetris_Windows_Mobile
             nextShape.drawNextShape(shapeNext, colorNext, rotaterNext);
             gamePiece.Piece++;
 
-
-            timer.Enabled = true;
             menuItem2.Enabled = true;
             menuItem2.Text = "Pause";
             if (bSound)
@@ -81,25 +81,23 @@ namespace Tetris_Windows_Mobile
             changeMode(ModeGame.Playing);
         }
 
-        private void menuItem4_Click(object sender, EventArgs e)
-        {
-            //continue game.
-        }
-
         private void menuItem6_Click(object sender, EventArgs e)
         {
+            changeMode(ModeGame.MenuFocus);
             Help help = new Help(this);
             help.ShowDialog();
         }
 
         private void menuItem7_Click(object sender, EventArgs e)
         {
+            changeMode(ModeGame.MenuFocus);
             TopScores highScores = new TopScores(this);
             highScores.ShowDialog();
         }
 
         private void menuItem8_Click(object sender, EventArgs e)
         {
+            changeMode(ModeGame.MenuFocus);
             About about = new About(this);
             about.ShowDialog();
         }
@@ -108,6 +106,7 @@ namespace Tetris_Windows_Mobile
         {
             if (modeGame == ModeGame.Paused)
             {
+                bPause = false;
                 menuItem2.Text = "Pause";
                 menuItem9.Enabled = true;
                 menuItem10.Enabled = true;
@@ -117,6 +116,7 @@ namespace Tetris_Windows_Mobile
             }
             else
             {
+                bPause = true;
                 menuItem2.Text = "Resume";
                 menuItem9.Enabled = false;
                 menuItem10.Enabled = false;
@@ -145,6 +145,19 @@ namespace Tetris_Windows_Mobile
         public  void changeMode(ModeGame mode)
         {
             modeGame = mode;
+            if (mode == ModeGame.MenuFocus)
+            {
+                if (bSound)
+                    playSound.stopSoundTheme();
+                timer.Enabled = false;
+            }
+            if (mode == ModeGame.Playing)
+            {
+                if (bSound)
+                    playSound.playSoundTheme();
+                timer.Enabled = true;
+            }
+                
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -215,6 +228,9 @@ namespace Tetris_Windows_Mobile
 
                 case ModeGame.Ready:
                     break;
+
+                case ModeGame.MenuFocus:
+                    break;
             }   
         }
 
@@ -265,9 +281,11 @@ namespace Tetris_Windows_Mobile
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
             int temp = 0;
-            if(modeGame == ModeGame.Playing)
+            if (modeGame == ModeGame.Playing)
+            {
                 gameControl.keyDown(e, playSound, bSound, ref temp, bGhost);
-            gameScore.Score += temp;
+                gameScore.Score += temp;
+            }
         }
     }
 }

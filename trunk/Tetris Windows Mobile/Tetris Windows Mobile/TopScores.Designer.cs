@@ -102,7 +102,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
-        private Connecting connecting;
         private System.Windows.Forms.ListView listView1;
     }
 }
