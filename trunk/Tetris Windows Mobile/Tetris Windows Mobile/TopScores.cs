@@ -12,7 +12,6 @@ namespace Tetris_Windows_Mobile
     public partial class TopScores : Form
     {
         private MainForm mainForm;
-
         public TopScores(MainForm mainForm)
         {
             InitializeComponent();
@@ -21,11 +20,19 @@ namespace Tetris_Windows_Mobile
 
         private void menuItem1_Click(object sender, EventArgs e)
         {
-            if (!mainForm.bPause)
-                mainForm.changeMode(ModeGame.Playing);
+            if (mainForm.stt == 0)
+                mainForm.changeMode(ModeGame.Ready);
             else
-                mainForm.changeMode(ModeGame.Paused);
+                if (mainForm.stt == 1)
+                    mainForm.changeMode(ModeGame.Playing);
+                else
+                    mainForm.changeMode(ModeGame.Paused);
             Close();
+        }
+
+        private void TopScores_Load(object sender, EventArgs e)
+        {
+            Constant.saver.readRecords(listView1);
         }
     }
 }

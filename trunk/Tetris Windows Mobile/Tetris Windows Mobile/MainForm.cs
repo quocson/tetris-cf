@@ -27,7 +27,7 @@ namespace Tetris_Windows_Mobile
         private int tempScore;
         private bool bGhost;
         private bool bSound;
-        public bool bPause;
+        public int stt;
         private PlaySound playSound;
         Stack<int> full;
         
@@ -50,7 +50,7 @@ namespace Tetris_Windows_Mobile
             Controls.Add(gamePiece);
             bGhost = true;
             bSound = true;
-            bPause = false;
+            stt = 0;
             tempScore = 0;
             full = new Stack<int>();
             playSound = new PlaySound();
@@ -72,6 +72,7 @@ namespace Tetris_Windows_Mobile
             gameControl.gameInitObj(out  shapeNext, out  colorNext, out  rotaterNext);
             gameControl.setShape(shapeNext, colorNext, rotaterNext);
             nextShape.drawNextShape(shapeNext, colorNext, rotaterNext);
+            gameControl.drawGhostShape(bGhost);
             gamePiece.Piece++;
 
             menuItem2.Enabled = true;
@@ -106,7 +107,7 @@ namespace Tetris_Windows_Mobile
         {
             if (modeGame == ModeGame.Paused)
             {
-                bPause = false;
+                stt = 1;
                 menuItem2.Text = "Pause";
                 menuItem9.Enabled = true;
                 menuItem10.Enabled = true;
@@ -116,7 +117,7 @@ namespace Tetris_Windows_Mobile
             }
             else
             {
-                bPause = true;
+                stt = 2;
                 menuItem2.Text = "Resume";
                 menuItem9.Enabled = false;
                 menuItem10.Enabled = false;
@@ -153,6 +154,7 @@ namespace Tetris_Windows_Mobile
             }
             if (mode == ModeGame.Playing)
             {
+                stt = 1;
                 if (bSound)
                     playSound.playSoundTheme();
                 timer.Enabled = true;
@@ -167,7 +169,7 @@ namespace Tetris_Windows_Mobile
                     
                 case  ModeGame.Playing:
                     gameControl.drawPanel();
-                    if  (!gameControl.gameObjFall(bGhost))
+                    if  (!gameControl.gameObjFall())
                     {
                         gameControl.locked();
                         gameControl.drawPanel();
@@ -211,6 +213,7 @@ namespace Tetris_Windows_Mobile
                             gameControl.gameInitObj(out  shapeNext, out  colorNext, out  rotaterNext);
                             gameControl.setShape(shapeNext, colorNext, rotaterNext);
                             nextShape.drawNextShape(shapeNext, colorNext, rotaterNext);
+                            gameControl.drawGhostShape(bGhost);
                             gamePiece.Piece++;
                         }
 

@@ -21,10 +21,13 @@ namespace Tetris_Windows_Mobile
 
         private void menuItem1_Click(object sender, EventArgs e)
         {
-            if (!mainForm.bPause)
-                mainForm.changeMode(ModeGame.Playing);
+            if (mainForm.stt == 0)
+                mainForm.changeMode(ModeGame.Ready);
             else
-                mainForm.changeMode(ModeGame.Paused);
+                if (mainForm.stt == 1)
+                    mainForm.changeMode(ModeGame.Playing);
+                else
+                    mainForm.changeMode(ModeGame.Paused);
             Close();
         }
     }
