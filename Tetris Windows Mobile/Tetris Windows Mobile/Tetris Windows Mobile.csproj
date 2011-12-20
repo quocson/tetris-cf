@@ -132,10 +132,10 @@
     <Compile Include="TopScores.Designer.cs">
       <DependentUpon>TopScores.cs</DependentUpon>
     </Compile>
+    <Compile Include="XmlSave.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\arrow.JPG" />
-    <None Include="Resources\colors.png" />
     <None Include="Resources\level.png" />
     <None Include="Resources\next.png" />
     <None Include="Resources\piece.png" />
@@ -156,6 +156,7 @@
     <EmbeddedResource Include="Resources\verygood.wav" />
     <EmbeddedResource Include="Resources\wonderfun.wav" />
     <EmbeddedResource Include="Resources\wow.wav" />
+    <None Include="Resources\colors.png" />
     <Content Include="tetris.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />

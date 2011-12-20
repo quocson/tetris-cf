@@ -22,15 +22,21 @@ namespace Tetris_Windows_Mobile
         public static Bitmap iColor;
         public static Bitmap iNumber;
         public static Random rd;
+        public static string fPath;
         public const int d = 13;
 
+        public static XmlSave saver;
         static Constant()
         {
+
+            fPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) + @"\highscore.xml";
+            saver = new XmlSave();
             xMax = 24;
             yMax = 13;
             map = new int[xMax, yMax];
             startXscreen = 65;
             speedGame = 799;
+
             iBorderGame = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.border);
             iNext = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.next);
             iScore = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.score);

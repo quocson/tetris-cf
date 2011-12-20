@@ -84,19 +84,13 @@ namespace Tetris_Windows_Mobile
             return shape.checkGameOver();
         }
 
-        public bool gameObjFall(bool g)
+        public bool gameObjFall()
         {            
             if (shape.canFallDown())
             {
                 Graphics gr = Graphics.FromImage(imageBuffer);
                 shape.eraserShape(gr);
                 shape.fallDown();
-                if (g)
-                {
-                    ghostShape = new Shape(shape.StatusArr, shape.Color, Shape.xScreen, shape.yScreen, shape.Row, shape.Col);
-                    ghostShape.goToEnd();
-                    ghostShape.drawGhostShape(gr);
-                }
                 shape.drawShape(gr);
                 gr.Dispose();
                 return true;
@@ -166,6 +160,19 @@ namespace Tetris_Windows_Mobile
                 ghostShape.goToEnd();
                 ghostShape.drawGhostShape(gr);
                 shape.drawShape(gr);
+            }
+            Refresh();
+            gr.Dispose();
+        }
+
+        public void drawGhostShape(bool g)
+        {
+            Graphics gr = Graphics.FromImage(imageBuffer);
+            if (g)
+            {
+                ghostShape = new Shape(shape.StatusArr, shape.Color, Shape.xScreen, shape.yScreen, shape.Row, shape.Col);
+                ghostShape.goToEnd();
+                ghostShape.drawGhostShape(gr);
             }
             Refresh();
             gr.Dispose();
