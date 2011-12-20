@@ -37,7 +37,7 @@ namespace Tetris_Windows_Mobile
                 case 15:
                     row = 4; col = 1;
                     x = Constant.startXscreen;
-                    y = -52;
+                    y = -39;
                     for (i = 0; i < row; i++)
                         statusArr[i, 0] = 1;
                     break;

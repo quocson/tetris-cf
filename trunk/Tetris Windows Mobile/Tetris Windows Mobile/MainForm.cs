@@ -10,7 +10,7 @@ using System.Reflection;
 
 namespace Tetris_Windows_Mobile
 {
-    public enum ModeGame { Ready, Loading, New, Playing, MenuFocus, Paused, Over, Win };
+    public enum ModeGame {Ready, Playing, MenuFocus, Paused, Over, Win };
 
     public partial class MainForm : Form
     {
@@ -29,6 +29,7 @@ namespace Tetris_Windows_Mobile
         private bool bSound;
         private PlaySound playSound;
         Stack<int> full;
+        
 
         public MainForm()
         {
@@ -66,11 +67,18 @@ namespace Tetris_Windows_Mobile
             gamePiece.Piece = 0;
 
 
-            changeMode(ModeGame.New);
+            gameControl.gameInitObj(out  shapeNext, out  colorNext, out  rotaterNext);
+            gameControl.setShape(shapeNext, colorNext, rotaterNext);
+            nextShape.drawNextShape(shapeNext, colorNext, rotaterNext);
+            gamePiece.Piece++;
+
 
             timer.Enabled = true;
+            menuItem2.Enabled = true;
+            menuItem2.Text = "Pause";
             if (bSound)
                 playSound.playSoundTheme();
+            changeMode(ModeGame.Playing);
         }
 
         private void menuItem4_Click(object sender, EventArgs e)
@@ -98,6 +106,23 @@ namespace Tetris_Windows_Mobile
 
         private void menuItem2_Click(object sender, EventArgs e)
         {
+            if (modeGame == ModeGame.Paused)
+            {
+                menuItem2.Text = "Pause";
+                menuItem9.Enabled = true;
+                menuItem10.Enabled = true;
+                if (bSound)
+                    playSound.playSoundTheme();
+                changeMode(ModeGame.Playing);
+            }
+            else
+            {
+                menuItem2.Text = "Resume";
+                menuItem9.Enabled = false;
+                menuItem10.Enabled = false;
+                playSound.stopSoundTheme();
+                changeMode(ModeGame.Paused);
+            }
         }
 
         private void MainForm_LostFocus(object sender, EventArgs e)
@@ -126,16 +151,6 @@ namespace Tetris_Windows_Mobile
         {
             switch(modeGame)
             {
-                case ModeGame.Loading:
-                    break;
-
-                case ModeGame.New:
-                    gameControl.gameInitObj(out  shapeNext, out  colorNext, out  rotaterNext);
-                    gameControl.setShape(shapeNext, colorNext, rotaterNext);
-                    nextShape.drawNextShape(shapeNext, colorNext, rotaterNext);
-                    changeMode(ModeGame.Playing);
-                    gamePiece.Piece++;
-                    break;
                     
                 case  ModeGame.Playing:
                     gameControl.drawPanel();
@@ -160,8 +175,8 @@ namespace Tetris_Windows_Mobile
                         while (full.Count > 0)
                         {
                             c++;
-                            tempScore += c * (Constant.yMax / Constant.d) * 20;
                             val = full.Pop() + i;
+                            tempScore += c * (Constant.yMax / Constant.d) * (24 - val);
                             gameControl.deleteLine(val);
                             Constant.updateMap(val, ref i);
                         }
@@ -179,7 +194,11 @@ namespace Tetris_Windows_Mobile
                            changeMode(ModeGame.Win);
                         else
                         {
-                            changeMode( ModeGame.New);
+
+                            gameControl.gameInitObj(out  shapeNext, out  colorNext, out  rotaterNext);
+                            gameControl.setShape(shapeNext, colorNext, rotaterNext);
+                            nextShape.drawNextShape(shapeNext, colorNext, rotaterNext);
+                            gamePiece.Piece++;
                         }
 
                     }
@@ -192,6 +211,9 @@ namespace Tetris_Windows_Mobile
                     break;
 
                 case ModeGame.Win:
+                    break;
+
+                case ModeGame.Ready:
                     break;
             }   
         }
@@ -212,16 +234,23 @@ namespace Tetris_Windows_Mobile
 
         private void menuItem5_Click(object sender, EventArgs e)
         {
-            playSound.stopSoundTheme();
-            playSound.stopSoundPlayer();
+            //playSound.stopSoundTheme();
+            //playSound.stopSoundPlayer();
             //connecting.updateScore(gameScore.Score);
             //save game (if dang choi).
+            gameControl.destroy();
+            gameLevel.destroy();
+            gameLine.destroy();
+            gamePiece.destroy();
+            gameScore.destroy();
+            nextShape.destroy();
+            playSound.Dispose();
             Application.Exit();
         }
 
         private void menuItem9_Click(object sender, EventArgs e)
         {
-            if (bGhost && gameControl.check())
+            if (bGhost && gameControl.check() && modeGame == ModeGame.Playing)
             {
                 gameControl.eraserGhostShape();
                 bGhost = false;

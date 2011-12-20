@@ -19,6 +19,13 @@ namespace Tetris_Windows_Mobile
             imgBuff = new Bitmap(Constant.iNext);
         }
 
+        public void destroy()
+        {
+            imgBuff.Dispose();
+            Dispose();
+            GC.SuppressFinalize(this);
+        }
+
         public void drawNextShape(int kind, int color, int rotate)
         {
             int r, c;
