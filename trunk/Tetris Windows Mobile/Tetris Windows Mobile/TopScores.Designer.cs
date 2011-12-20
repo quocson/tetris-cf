@@ -35,11 +35,13 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
+            this.menuItem2 = new System.Windows.Forms.MenuItem();
             this.SuspendLayout();
             // 
             // mainMenu1
             // 
             this.mainMenu1.MenuItems.Add(this.menuItem1);
+            this.mainMenu1.MenuItems.Add(this.menuItem2);
             // 
             // menuItem1
             // 
@@ -81,6 +83,11 @@
             this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader2.Width = 127;
             // 
+            // menuItem2
+            // 
+            this.menuItem2.Text = "Clear";
+            this.menuItem2.Click += new System.EventHandler(this.menuItem2_Click);
+            // 
             // TopScores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -104,5 +111,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.MenuItem menuItem2;
     }
 }

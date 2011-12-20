@@ -32,6 +32,14 @@ namespace Tetris_Windows_Mobile
 
         private void TopScores_Load(object sender, EventArgs e)
         {
+            listView1.Items.Clear();
+            Constant.saver.readRecords(listView1);
+        }
+
+        private void menuItem2_Click(object sender, EventArgs e)
+        {
+            Constant.saver.clear();
+            listView1.Items.Clear();
             Constant.saver.readRecords(listView1);
         }
     }

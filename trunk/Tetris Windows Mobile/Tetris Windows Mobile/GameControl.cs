@@ -183,7 +183,7 @@ namespace Tetris_Windows_Mobile
             ghostShape = null;
         }
 
-        public void keyDown(KeyEventArgs e, PlaySound sound, bool enableSound, ref int tempScore, bool g)
+        public void keyDown(KeyEventArgs e, ref int tempScore, bool g)
         {
             Graphics gr = Graphics.FromImage(imageBuffer);
             shape.eraserShape(gr);
@@ -199,10 +199,6 @@ namespace Tetris_Windows_Mobile
                 if (ghostShape != null && g)
                     ghostShape.eraserShape(gr);
                 shape.rotate();
-            }
-            else
-            if (e.KeyValue == (int)System.Windows.Forms.Keys.Up && !shape.canRotate())
-            {
             }
             else
             if (e.KeyValue == (int)System.Windows.Forms.Keys.Right && shape.canMoveRight())

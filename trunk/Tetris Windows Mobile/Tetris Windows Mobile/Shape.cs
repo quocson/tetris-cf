@@ -428,10 +428,9 @@ namespace Tetris_Windows_Mobile
 
         public bool checkGameOver()
         {
-            int i;
-            for (i = 0; i < 4; i++)
+            for (int i = 0; i < 4; i++)
             {
-                if (cube[i].ScreenY < 0) 
+                if (cube[i].ScreenY < Constant.d) 
                     return true;
             }
             return false;

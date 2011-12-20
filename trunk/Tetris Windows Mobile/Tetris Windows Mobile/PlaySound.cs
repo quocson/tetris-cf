@@ -64,7 +64,7 @@ namespace Tetris_Windows_Mobile
             {
                 
             }
-            player.PlaySync();
+            player.Play();
         }
 
         public void playSoundBrilliant()
@@ -80,39 +80,7 @@ namespace Tetris_Windows_Mobile
             {
                 
             }
-            player.PlaySync();
-        }
-
-        public void playSoundClear()
-        {
-            player.Dispose();
-            s = a.GetManifestResourceStream("Tetris_Windows_Mobile.Resources.clear.wav");
-            player = new SoundPlayer(s);
-            try
-            {
-                player.LoadAsync();
-            }
-            catch (Exception )
-            {
-                
-            }
-            player.PlaySync();
-        }
-
-        public void playSoundExcellent()
-        {
-            player.Dispose();
-            s = a.GetManifestResourceStream("Tetris_Windows_Mobile.Resources.cellent.wav");
-            player = new SoundPlayer(s);
-            try
-            {
-                player.LoadAsync();
-            }
-            catch (Exception )
-            {
-                
-            }
-            player.PlaySync();
+            player.Play();
         }
 
         public void playSoundGameOver()
@@ -128,7 +96,7 @@ namespace Tetris_Windows_Mobile
             {
                 
             }
-            player.PlaySync();
+            player.Play();
         }
 
         public void playSoundLevelUp()
@@ -144,55 +112,7 @@ namespace Tetris_Windows_Mobile
             {
                 
             }
-            player.PlaySync();
-        }
-
-        public void playSoundMove()
-        {
-            player.Dispose();
-            s = a.GetManifestResourceStream("Tetris_Windows_Mobile.Resources.move.wav");
-            player = new SoundPlayer(s);
-            try
-            {
-                player.LoadAsync();
-            }
-            catch (Exception )
-            {
-                
-            }
-            player.PlaySync();
-        }
-
-        public void playSoundRotate()
-        {
-            player.Dispose();
-            s = a.GetManifestResourceStream("Tetris_Windows_Mobile.Resources.rotate.wav");
-            player = new SoundPlayer(s);
-            try
-            {
-                player.LoadAsync();
-            }
-            catch (Exception )
-            {
-                
-            }
-            player.PlaySync();
-        }
-
-        public void playSoundRotateFail()
-        {
-            player.Dispose();
-            s = a.GetManifestResourceStream("Tetris_Windows_Mobile.Resources.rotatefail.wav");
-            player = new SoundPlayer(s);
-            try
-            {
-                player.LoadAsync();
-            }
-            catch (Exception )
-            {
-                
-            }
-            player.PlaySync();
+            player.Play();
         }
 
         public void playSoundVeryGood()
@@ -208,7 +128,7 @@ namespace Tetris_Windows_Mobile
             {
                 
             }
-            player.PlaySync();
+            player.Play();
         }
 
         public void playSoundWonderful()
@@ -224,13 +144,13 @@ namespace Tetris_Windows_Mobile
             {
                 
             }
-            player.PlaySync();
+            player.Play();
         }
 
-        public void playSoundWow()
+        public void playSoundGameWin()
         {
             player.Dispose();
-            s = a.GetManifestResourceStream("Tetris_Windows_Mobile.Resources.wow.wav");
+            s = a.GetManifestResourceStream("Tetris_Windows_Mobile.Resources.gamewin.wav");
             player = new SoundPlayer(s);
             try
             {
@@ -240,7 +160,7 @@ namespace Tetris_Windows_Mobile
             {
                 
             }
-            player.PlaySync();
+            player.Play();
         }
     }
 }
