@@ -46,3 +46,15 @@ C:\Users\HuuTai_it\Desktop\fuck\Tetris Windows Mobile\Tetris Windows Mobile\obj\
 C:\Users\HuuTai_it\Desktop\fuck\Tetris Windows Mobile\Tetris Windows Mobile\obj\Debug\Tetris Windows Mobile.csproj.GenerateResource.Cache
 C:\Users\HuuTai_it\Desktop\fuck\Tetris Windows Mobile\Tetris Windows Mobile\obj\Debug\Tetris Windows Mobile.exe
 C:\Users\HuuTai_it\Desktop\fuck\Tetris Windows Mobile\Tetris Windows Mobile\obj\Debug\Tetris Windows Mobile.pdb
+E:\Document\Mobile development\Net\Project Tetris\Tetris Windows Mobile\Tetris Windows Mobile\bin\Debug\Tetris Windows Mobile.exe
+E:\Document\Mobile development\Net\Project Tetris\Tetris Windows Mobile\Tetris Windows Mobile\bin\Debug\Tetris Windows Mobile.pdb
+E:\Document\Mobile development\Net\Project Tetris\Tetris Windows Mobile\Tetris Windows Mobile\bin\Debug\System.Data.SqlServerCe.dll
+E:\Document\Mobile development\Net\Project Tetris\Tetris Windows Mobile\Tetris Windows Mobile\obj\Debug\ResolveAssemblyReference.cache
+E:\Document\Mobile development\Net\Project Tetris\Tetris Windows Mobile\Tetris Windows Mobile\obj\Debug\Tetris_Windows_Mobile.About.resources
+E:\Document\Mobile development\Net\Project Tetris\Tetris Windows Mobile\Tetris Windows Mobile\obj\Debug\Tetris_Windows_Mobile.Help.resources
+E:\Document\Mobile development\Net\Project Tetris\Tetris Windows Mobile\Tetris Windows Mobile\obj\Debug\Tetris_Windows_Mobile.MainForm.resources
+E:\Document\Mobile development\Net\Project Tetris\Tetris Windows Mobile\Tetris Windows Mobile\obj\Debug\Tetris_Windows_Mobile.Properties.Resources.resources
+E:\Document\Mobile development\Net\Project Tetris\Tetris Windows Mobile\Tetris Windows Mobile\obj\Debug\Tetris_Windows_Mobile.TopScores.resources
+E:\Document\Mobile development\Net\Project Tetris\Tetris Windows Mobile\Tetris Windows Mobile\obj\Debug\Tetris Windows Mobile.csproj.GenerateResource.Cache
+E:\Document\Mobile development\Net\Project Tetris\Tetris Windows Mobile\Tetris Windows Mobile\obj\Debug\Tetris Windows Mobile.exe
+E:\Document\Mobile development\Net\Project Tetris\Tetris Windows Mobile\Tetris Windows Mobile\obj\Debug\Tetris Windows Mobile.pdb
