@@ -10,7 +10,7 @@ using System.Reflection;
 
 namespace Tetris_Windows_Mobile
 {
-    public enum ModeGame {Ready, Playing, MenuFocus, Paused, Over, Win };
+    public enum ModeGame {Ready, Playing, MenuFocus, Paused };
 
     public partial class MainForm : Form
     {
@@ -50,7 +50,6 @@ namespace Tetris_Windows_Mobile
             Controls.Add(gamePiece);
             bGhost = true;
             bSound = true;
-            stt = 0;
             tempScore = 0;
             full = new Stack<int>();
             playSound = new PlaySound();
@@ -59,8 +58,6 @@ namespace Tetris_Windows_Mobile
 
         private void menuItem3_Click(object sender, EventArgs e)
         {
-            changeMode(ModeGame.Paused);
-
             gameControl.resetGame();
 
             gameScore.Score = 0;
@@ -159,6 +156,11 @@ namespace Tetris_Windows_Mobile
                     playSound.playSoundTheme();
                 timer.Enabled = true;
             }
+            if (mode == ModeGame.Ready)
+                stt = 0;
+            if (mode == ModeGame.Paused)
+                if (bSound)
+                    playSound.stopSoundTheme();
                 
         }
 
@@ -176,17 +178,66 @@ namespace Tetris_Windows_Mobile
                         gameControl.setGhostNull();
                         if (gameControl.isEndGame())
                         {
-                            changeMode(ModeGame.Over);
-                            return;
-                        }
+                            this.timer.Enabled = false;
+                            bool newgame = false;
+                            if (bSound)
+                                playSound.playSoundGameOver();
+                            int rank = Constant.saver.saveRecords(gameScore.Score);
+                            if ( rank > 0)
+                            {
+                                if (MessageBox.Show("New High Score: " + gameScore.Score + "\nRank: " + rank  + "\nDo you want to play again?",
+                                    "Game Over!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+                                {
+                                    newgame = true;
+                                }
+                            }
+
+                            else
+                                if (MessageBox.Show("Your score: " + gameScore.Score + "\nDo you want to play again?",
+                                    "Game Over!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+                                {
+                                    newgame = true;
+                                }
+                            if (newgame)
+                            {
+                                gameControl.resetGame();
+
+                                gameScore.Score = 0;
+                                gameLevel.Level = 1;
+                                gameLine.Line = 0;
+                                gamePiece.Piece = 0;
+                                gameControl.gameInitObj(out  shapeNext, out  colorNext, out  rotaterNext);
+                                gameControl.setShape(shapeNext, colorNext, rotaterNext);
+                                nextShape.drawNextShape(shapeNext, colorNext, rotaterNext);
+                                gamePiece.Piece++;
+
+                                menuItem2.Enabled = true;
+                                menuItem2.Text = "Pause";
+                                if (bSound)
+                                    playSound.playSoundTheme();
+                                changeMode(ModeGame.Playing);
+                                timer.Enabled = true;
+                            }
+                            else
+                            {
+                                changeMode(ModeGame.Ready);
+                                playSound.stopSoundTheme();
+                                timer.Enabled = true;
+                                menuItem2.Enabled = false;
+                                return;
+                            }
+                        }   
                         int val, i = 0;
                         bool isfull;
                         isfull = ((full = gameControl.fullLine()).Count > 0);
 
                        
                         tempScore += (full.Count / 4) * 100;
+                        if (tempScore > 0 && bSound)
+                            playSound.playSoundWonderful();
                         gameLine.Line += full.Count;
                         int c = 0;
+                        int numRow = full.Count;
                         while (full.Count > 0)
                         {
                             c++;
@@ -195,18 +246,70 @@ namespace Tetris_Windows_Mobile
                             gameControl.deleteLine(val);
                             Constant.updateMap(val, ref i);
                         }
+                        if (bSound)
+                            switch (numRow)
+                            {
+                                case 1: playSound.playSoundAmazing(); break;
+                                case 2: playSound.playSoundVeryGood(); break;
+                                case 3: playSound.playSoundBrilliant(); break;
+                                case 4: playSound.playSoundWonderful(); break;
+                            }
                         gameScore.Score += tempScore;
+                        levelUp();
                         tempScore = 0;
-                        if (gameScore.Score > gameLevel.Level * gameLevel.Level * 999)
-                        {
-                            gameLevel.Level++;
-                            Constant.speedGame = 1000 - (gameLevel.Level / 10 * 100);
-                            gameControl.resetGame();
-                        }
-                        
+                       
 
                         if (gameLevel.Level == 99)
-                           changeMode(ModeGame.Win);
+                        {
+                            this.timer.Enabled = false;
+                            bool newgame = false;
+                            if (bSound)
+                                playSound.playSoundGameWin();
+                            int rank = Constant.saver.saveRecords(gameScore.Score);
+                            if (rank > 0)
+                            {
+                                if (MessageBox.Show("New High Score: " + gameScore.Score + "\nRank: " + rank + "\nDo you want to play again?",
+                                    "You Win!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+                                {
+                                    newgame = true;
+                                }
+                            }
+
+                            else
+                                if (MessageBox.Show("Your score: " + gameScore.Score + "\nDo you want to play again?",
+                                    "You Win!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+                                {
+                                    newgame = true;
+                                }
+                            if (newgame)
+                            {
+                                gameControl.setGhostNull();
+                                gameControl.resetGame();
+
+                                gameScore.Score = 0;
+                                gameLevel.Level = 1;
+                                gameLine.Line = 0;
+                                gamePiece.Piece = 0;
+                                gameControl.gameInitObj(out  shapeNext, out  colorNext, out  rotaterNext);
+                                gameControl.setShape(shapeNext, colorNext, rotaterNext);
+                                nextShape.drawNextShape(shapeNext, colorNext, rotaterNext);
+                                gamePiece.Piece++;
+
+                                menuItem2.Enabled = true;
+                                menuItem2.Text = "Pause";
+                                if (bSound)
+                                    playSound.playSoundTheme();
+                                changeMode(ModeGame.Playing);
+                                timer.Enabled = true;
+                            }
+                            else
+                            {
+                                changeMode(ModeGame.Ready);
+                                playSound.stopSoundTheme();
+                                timer.Enabled = true;
+                                return;
+                            }
+                        }
                         else
                         {
 
@@ -221,12 +324,6 @@ namespace Tetris_Windows_Mobile
                     break;
 
                 case ModeGame.Paused:
-                    break;
-
-                case ModeGame.Over:
-                    break;
-
-                case ModeGame.Win:
                     break;
 
                 case ModeGame.Ready:
@@ -253,18 +350,27 @@ namespace Tetris_Windows_Mobile
 
         private void menuItem5_Click(object sender, EventArgs e)
         {
-            //playSound.stopSoundTheme();
-            //playSound.stopSoundPlayer();
-            //connecting.updateScore(gameScore.Score);
-            //save game (if dang choi).
-            gameControl.destroy();
-            gameLevel.destroy();
-            gameLine.destroy();
-            gamePiece.destroy();
-            gameScore.destroy();
-            nextShape.destroy();
-            playSound.Dispose();
-            Application.Exit();
+            changeMode(ModeGame.Paused);
+
+            if (MessageBox.Show("Are you sure you want to exit?",
+                "Exit confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+            {
+                Constant.saver.saveRecords(gameScore.Score);
+                gameControl.destroy();
+                gameLevel.destroy();
+                gameLine.destroy();
+                gamePiece.destroy();
+                gameScore.destroy();
+                nextShape.destroy();
+                playSound.Dispose();
+                Application.Exit();
+            }
+            else
+                if (stt == 0)
+                    changeMode(ModeGame.Ready);
+                else
+                    if (stt == 1)
+                        changeMode(ModeGame.Playing);
         }
 
         private void menuItem9_Click(object sender, EventArgs e)
@@ -286,8 +392,20 @@ namespace Tetris_Windows_Mobile
             int temp = 0;
             if (modeGame == ModeGame.Playing)
             {
-                gameControl.keyDown(e, playSound, bSound, ref temp, bGhost);
+                gameControl.keyDown(e, ref temp, bGhost);
                 gameScore.Score += temp;
+                levelUp();
+            }
+        }
+        public void levelUp()
+        {
+            if (gameScore.Score > gameLevel.Level * gameLevel.Level * 999)
+            {
+                gameLevel.Level++;
+                if (bSound)
+                    playSound.playSoundLevelUp();
+                Constant.speedGame = 1000 - (gameLevel.Level / 10 * 100);
+                gameControl.resetGame();
             }
         }
     }

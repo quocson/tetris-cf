@@ -85,13 +85,6 @@ namespace Tetris_Windows_Mobile.Properties {
             }
         }
         
-        internal static byte[] clear {
-            get {
-                object obj = ResourceManager.GetObject("clear", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap colors {
             get {
                 object obj = ResourceManager.GetObject("colors", resourceCulture);
@@ -99,16 +92,16 @@ namespace Tetris_Windows_Mobile.Properties {
             }
         }
         
-        internal static byte[] excellent {
+        internal static byte[] gameover {
             get {
-                object obj = ResourceManager.GetObject("excellent", resourceCulture);
+                object obj = ResourceManager.GetObject("gameover", resourceCulture);
                 return ((byte[])(obj));
             }
         }
         
-        internal static byte[] gameover {
+        internal static byte[] gamewin {
             get {
-                object obj = ResourceManager.GetObject("gameover", resourceCulture);
+                object obj = ResourceManager.GetObject("gamewin", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -134,13 +127,6 @@ namespace Tetris_Windows_Mobile.Properties {
             }
         }
         
-        internal static byte[] move {
-            get {
-                object obj = ResourceManager.GetObject("move", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap next {
             get {
                 object obj = ResourceManager.GetObject("next", resourceCulture);
@@ -159,20 +145,6 @@ namespace Tetris_Windows_Mobile.Properties {
             get {
                 object obj = ResourceManager.GetObject("piece", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static byte[] rotate {
-            get {
-                object obj = ResourceManager.GetObject("rotate", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        internal static byte[] rotatefail {
-            get {
-                object obj = ResourceManager.GetObject("rotatefail", resourceCulture);
-                return ((byte[])(obj));
             }
         }
         
@@ -197,16 +169,9 @@ namespace Tetris_Windows_Mobile.Properties {
             }
         }
         
-        internal static byte[] wonderfun {
+        internal static byte[] wonderful {
             get {
-                object obj = ResourceManager.GetObject("wonderfun", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        internal static byte[] wow {
-            get {
-                object obj = ResourceManager.GetObject("wow", resourceCulture);
+                object obj = ResourceManager.GetObject("wonderful", resourceCulture);
                 return ((byte[])(obj));
             }
         }

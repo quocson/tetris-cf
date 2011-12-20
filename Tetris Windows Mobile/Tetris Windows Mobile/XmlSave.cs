@@ -44,8 +44,24 @@ namespace Tetris_Windows_Mobile
             }
             highscore.Save(Constant.fPath);
         }
-        public void saveRecords(int scores)
+        public void clear()
         {
+            highscore.Load(Constant.fPath);
+            highscore.RemoveAll();
+            XmlElement Goc = highscore.CreateElement("HighScoreBoard");
+            highscore.AppendChild(Goc);
+            for (int i = 0; i < 10; i++)
+            {
+                XmlElement Record = highscore.CreateElement("Record");
+                Record.SetAttribute("Name", (i + 1).ToString());
+                Record.SetAttribute("Score", "0");
+                Goc.AppendChild(Record);
+            }
+            highscore.Save(Constant.fPath);
+        }
+        public int saveRecords(int scores)
+        {
+            int res = 0;
             highscore.Load(Constant.fPath);
             int[] list = new int[10];
             for(int i = 0; i < 10;i++)
@@ -64,27 +80,39 @@ namespace Tetris_Windows_Mobile
                     for(int x = 9; x > 0; x--)
                         list[x] = list[x - 1];
                     list[i] = scores;
+                    res = 1;
+                    i = 10;
                 }
                 else if (i < 9 && list[i] > scores && list[i + 1] <= scores)
                 {
                     for (int x = 9; x > i; x--)
                         list[x] = list[x - 1];
                     list[i + 1] = scores;
+                    res = i + 2;
                     i = 10;
                 }
-                else if (i == 9 && list[i] < scores && list[i - 1] >= scores)
+                else if (i == 9 && list[i] <= scores && list[i - 1] > scores)
+                {
                     list[i] = scores;
-            highscore.RemoveAll();
-            XmlElement Goc = highscore.CreateElement("HighScoreBoard");
-            highscore.AppendChild(Goc);
-            for (int i = 0; i < 10; i++)
+                    res = 10;
+                    i = 10;
+                }
+            if (res > 0)
             {
-                XmlElement Record = highscore.CreateElement("Record");
-                Record.SetAttribute("Name", (i+1).ToString());
-                Record.SetAttribute("Score", list[i].ToString());
-                Goc.AppendChild(Record);
+                highscore.RemoveAll();
+                XmlElement Goc = highscore.CreateElement("HighScoreBoard");
+                highscore.AppendChild(Goc);
+                for (int i = 0; i < 10; i++)
+                {
+                    XmlElement Record = highscore.CreateElement("Record");
+                    Record.SetAttribute("Name", (i + 1).ToString());
+                    Record.SetAttribute("Score", list[i].ToString());
+                    Goc.AppendChild(Record);
+                }
+                highscore.Save(Constant.fPath);
             }
-            highscore.Save(Constant.fPath);
+            return res;
+            
 
         }
 
