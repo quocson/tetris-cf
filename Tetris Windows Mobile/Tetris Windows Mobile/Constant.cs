@@ -23,9 +23,6 @@ namespace Tetris_Windows_Mobile
         public static Bitmap iNumber;
         public static Random rd;
         public const int d = 13;
-        public static string connectionString = "Data Source=" + System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) + @"\TopScore.sdf; Password = 0912403";
-        public static string dbFilePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) + @"\TopScore.sdf";
-        public static string createSql = @"Create Table TopScore(Rank nvarchar(5) PRIMARY KEY , Score int NULL)";
 
         static Constant()
         {

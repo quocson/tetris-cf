@@ -65,7 +65,6 @@
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
     <Compile Include="Block.cs" />
-    <Compile Include="Connecting.cs" />
     <Compile Include="GameControl.cs">
       <SubType>Component</SubType>
     </Compile>
