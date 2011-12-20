@@ -58,13 +58,15 @@ namespace Tetris_Windows_Mobile
 
         private void menuItem3_Click(object sender, EventArgs e)
         {
+            if (modeGame == ModeGame.Playing)
+                Constant.saver.saveRecords(gameScore.Score);
             gameControl.resetGame();
 
             gameScore.Score = 0;
             gameLevel.Level = 1;
             gameLine.Line = 0;
             gamePiece.Piece = 0;
-
+            
 
             gameControl.gameInitObj(out  shapeNext, out  colorNext, out  rotaterNext);
             gameControl.setShape(shapeNext, colorNext, rotaterNext);
