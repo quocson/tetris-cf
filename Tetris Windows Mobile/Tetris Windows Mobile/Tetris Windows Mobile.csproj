@@ -150,7 +150,6 @@
     <EmbeddedResource Include="Resources\excellent.wav" />
     <EmbeddedResource Include="Resources\gameover.wav" />
     <EmbeddedResource Include="Resources\levelup.wav" />
-    <EmbeddedResource Include="Resources\lockdown.wav" />
     <EmbeddedResource Include="Resources\move.wav" />
     <EmbeddedResource Include="Resources\rotate.wav" />
     <EmbeddedResource Include="Resources\rotatefail.wav" />

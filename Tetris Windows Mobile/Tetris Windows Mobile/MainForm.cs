@@ -60,7 +60,7 @@ namespace Tetris_Windows_Mobile
 
             gameControl.resetGame();
 
-            gameScore.Score = 900;
+            gameScore.Score = 0;
             gameLevel.Level = 1;
             gameLine.Line = 0;
             gamePiece.Piece = 0;
@@ -139,10 +139,11 @@ namespace Tetris_Windows_Mobile
                     
                 case  ModeGame.Playing:
                     gameControl.drawPanel();
-                    if  (!gameControl.gameObjFall())
+                    if  (!gameControl.gameObjFall(bGhost))
                     {
                         gameControl.locked();
                         gameControl.drawPanel();
+                        gameControl.setGhostNull();
                         if (gameControl.isEndGame())
                         {
                             changeMode(ModeGame.Over);
@@ -220,14 +221,14 @@ namespace Tetris_Windows_Mobile
 
         private void menuItem9_Click(object sender, EventArgs e)
         {
-            if (bGhost)
+            if (bGhost && gameControl.check())
             {
-                //gameControl.eraserGhostShape();
+                gameControl.eraserGhostShape();
                 bGhost = false;
             }
             else
             {
-                //gameControl.setGhostShape(gameControl.Kind, gameControl.Color, gameControl.Rotate, false);
+                gameControl.drawGhostShape();
                 bGhost = true;
             }
         }
@@ -235,7 +236,8 @@ namespace Tetris_Windows_Mobile
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
             int temp = 0;
-            gameControl.keyDown(e, playSound, bSound, ref temp);
+            if(modeGame == ModeGame.Playing)
+                gameControl.keyDown(e, playSound, bSound, ref temp, bGhost);
             gameScore.Score += temp;
         }
     }
