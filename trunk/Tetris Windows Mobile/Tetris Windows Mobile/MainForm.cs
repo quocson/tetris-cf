@@ -129,14 +129,12 @@ namespace Tetris_Windows_Mobile
 
         private void MainForm_LostFocus(object sender, EventArgs e)
         {
+            timer.Enabled = false;
         }
 
         private void MainForm_GotFocus(object sender, EventArgs e)
         {
-        }
-
-        private void MainForm_KeyPress(object sender, KeyPressEventArgs e)
-        {
+            timer.Enabled = true;
         }
 
         private void MainForm_Paint(object sender, PaintEventArgs e)
@@ -413,6 +411,11 @@ namespace Tetris_Windows_Mobile
                     playSound.playSoundLevelUp();
                 Constant.speedGame = 1000 - (gameLevel.Level / 10 * 100);
                 gameControl.resetGame();
+                gameControl.gameInitObj(out  shapeNext, out  colorNext, out  rotaterNext);
+                gameControl.setShape(shapeNext, colorNext, rotaterNext);
+                nextShape.drawNextShape(shapeNext, colorNext, rotaterNext);
+                gameControl.drawGhostShape(bGhost);
+                gamePiece.Piece++;
             }
         }
     }
