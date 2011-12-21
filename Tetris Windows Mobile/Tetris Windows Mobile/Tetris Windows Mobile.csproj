@@ -143,15 +143,18 @@
     <None Include="Resources\line.png" />
     <None Include="Resources\border.png" />
     <None Include="Resources\number.png" />
+    <None Include="Resources\colors.png" />
     <EmbeddedResource Include="Resources\amazing.wav" />
     <EmbeddedResource Include="Resources\brilliant.wav" />
+    <EmbeddedResource Include="Resources\clear.wav" />
+    <EmbeddedResource Include="Resources\excellent.wav" />
     <EmbeddedResource Include="Resources\gameover.wav" />
+    <EmbeddedResource Include="Resources\gamewin.wav" />
     <EmbeddedResource Include="Resources\levelup.wav" />
     <EmbeddedResource Include="Resources\theme.wav" />
     <EmbeddedResource Include="Resources\verygood.wav" />
     <EmbeddedResource Include="Resources\wonderful.wav" />
-    <None Include="Resources\colors.png" />
-    <None Include="Resources\gamewin.wav" />
+    <EmbeddedResource Include="Resources\wow.wav" />
     <Content Include="tetris.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />

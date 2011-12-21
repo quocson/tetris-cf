@@ -162,5 +162,53 @@ namespace Tetris_Windows_Mobile
             }
             player.Play();
         }
+
+        public void playSoundExcellent()
+        {
+            player.Dispose();
+            s = a.GetManifestResourceStream("Tetris_Windows_Mobile.Resources.excellent.wav");
+            player = new SoundPlayer(s);
+            try
+            {
+                player.LoadAsync();
+            }
+            catch (Exception)
+            {
+
+            }
+            player.Play();
+        }
+
+        public void playSoundClear()
+        {
+            player.Dispose();
+            s = a.GetManifestResourceStream("Tetris_Windows_Mobile.Resources.clear.wav");
+            player = new SoundPlayer(s);
+            try
+            {
+                player.LoadAsync();
+            }
+            catch (Exception)
+            {
+
+            }
+            player.Play();
+        }
+
+        public void playSoundWow()
+        {
+            player.Dispose();
+            s = a.GetManifestResourceStream("Tetris_Windows_Mobile.Resources.wow.wav");
+            player = new SoundPlayer(s);
+            try
+            {
+                player.LoadAsync();
+            }
+            catch (Exception)
+            {
+
+            }
+            player.Play();
+        }
     }
 }
