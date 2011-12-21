@@ -75,6 +75,8 @@ namespace Tetris_Windows_Mobile
             gamePiece.Piece++;
 
             menuItem2.Enabled = true;
+            menuItem9.Enabled = true;
+            menuItem10.Enabled = true;
             menuItem2.Text = "Pause";
             if (bSound)
                 playSound.playSoundTheme();
@@ -235,8 +237,6 @@ namespace Tetris_Windows_Mobile
 
                        
                         tempScore += (full.Count / 4) * 100;
-                        if (tempScore > 0 && bSound)
-                            playSound.playSoundWonderful();
                         gameLine.Line += full.Count;
                         int c = 0;
                         int numRow = full.Count;
