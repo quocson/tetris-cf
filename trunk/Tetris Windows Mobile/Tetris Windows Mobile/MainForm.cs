@@ -165,7 +165,7 @@ namespace Tetris_Windows_Mobile
             if (mode == ModeGame.Paused)
                 if (bSound)
                     playSound.stopSoundTheme();
-                
+
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -239,7 +239,20 @@ namespace Tetris_Windows_Mobile
                         tempScore += (full.Count / 4) * 100;
                         gameLine.Line += full.Count;
                         int c = 0;
-                        int numRow = full.Count;
+                        int numRow = 0;
+                        if(full.Count != 0)
+                            numRow = Constant.rd.Next(1, 8);
+                        if (bSound)
+                            switch (numRow)
+                            {
+                                case 1: playSound.playSoundAmazing(); break;
+                                case 2: playSound.playSoundVeryGood(); break;
+                                case 3: playSound.playSoundBrilliant(); break;
+                                case 4: playSound.playSoundWonderful(); break;
+                                case 5: playSound.playSoundWow(); break;
+                                case 6: playSound.playSoundExcellent(); break;
+                                case 7: playSound.playSoundClear(); break;
+                            }
                         while (full.Count > 0)
                         {
                             c++;
@@ -248,14 +261,6 @@ namespace Tetris_Windows_Mobile
                             gameControl.deleteLine(val);
                             Constant.updateMap(val, ref i);
                         }
-                        if (bSound)
-                            switch (numRow)
-                            {
-                                case 1: playSound.playSoundAmazing(); break;
-                                case 2: playSound.playSoundVeryGood(); break;
-                                case 3: playSound.playSoundBrilliant(); break;
-                                case 4: playSound.playSoundWonderful(); break;
-                            }
                         gameScore.Score += tempScore;
                         levelUp();
                         tempScore = 0;

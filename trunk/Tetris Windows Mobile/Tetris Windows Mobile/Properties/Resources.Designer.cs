@@ -85,10 +85,24 @@ namespace Tetris_Windows_Mobile.Properties {
             }
         }
         
+        internal static byte[] clear {
+            get {
+                object obj = ResourceManager.GetObject("clear", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap colors {
             get {
                 object obj = ResourceManager.GetObject("colors", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static byte[] excellent {
+            get {
+                object obj = ResourceManager.GetObject("excellent", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -172,6 +186,13 @@ namespace Tetris_Windows_Mobile.Properties {
         internal static byte[] wonderful {
             get {
                 object obj = ResourceManager.GetObject("wonderful", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        internal static byte[] wow {
+            get {
+                object obj = ResourceManager.GetObject("wow", resourceCulture);
                 return ((byte[])(obj));
             }
         }
