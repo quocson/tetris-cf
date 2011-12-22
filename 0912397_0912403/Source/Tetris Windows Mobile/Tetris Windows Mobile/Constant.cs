@@ -12,7 +12,6 @@ namespace Tetris_Windows_Mobile
         public static int[,] map;
         public static int startXscreen;
         public const int dyFallDown = 13;
-        public static int speedGame;
         public static Bitmap iBorderGame;
         public static Bitmap iNext;
         public static Bitmap iScore;
@@ -35,7 +34,7 @@ namespace Tetris_Windows_Mobile
             yMax = 13;
             map = new int[xMax, yMax];
             startXscreen = 65;
-            speedGame = 799;
+
 
             iBorderGame = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.border);
             iNext = new Bitmap(Tetris_Windows_Mobile.Properties.Resources.next);
