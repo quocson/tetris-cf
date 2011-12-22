@@ -35,7 +35,6 @@ namespace Tetris_Windows_Mobile
         public MainForm()
         {
             InitializeComponent();
-            timer.Interval = Constant.speedGame;
             gameControl = new GameControl();
             nextShape = new NextShape();
             gameScore = new GameScore();
@@ -74,6 +73,7 @@ namespace Tetris_Windows_Mobile
             gameControl.drawGhostShape(bGhost);
             gamePiece.Piece++;
 
+            timer.Interval = 500;
             menuItem2.Enabled = true;
             menuItem9.Enabled = true;
             menuItem10.Enabled = true;
@@ -213,6 +213,7 @@ namespace Tetris_Windows_Mobile
                                 nextShape.drawNextShape(shapeNext, colorNext, rotaterNext);
                                 gamePiece.Piece++;
 
+                                timer.Interval = 500;
                                 menuItem2.Enabled = true;
                                 menuItem2.Text = "Pause";
                                 if (bSound)
@@ -300,6 +301,7 @@ namespace Tetris_Windows_Mobile
                                 nextShape.drawNextShape(shapeNext, colorNext, rotaterNext);
                                 gamePiece.Piece++;
 
+                                timer.Interval = 500;
                                 menuItem2.Enabled = true;
                                 menuItem2.Text = "Pause";
                                 if (bSound)
@@ -409,12 +411,11 @@ namespace Tetris_Windows_Mobile
                 gameLevel.Level++;
                 if (bSound)
                     playSound.playSoundLevelUp();
-                Constant.speedGame = 1000 - (gameLevel.Level / 10 * 100);
                 gameControl.resetGame();
                 gameControl.gameInitObj(out  shapeNext, out  colorNext, out  rotaterNext);
                 gameControl.setShape(shapeNext, colorNext, rotaterNext);
                 nextShape.drawNextShape(shapeNext, colorNext, rotaterNext);
-                gameControl.drawGhostShape(bGhost);
+                timer.Interval = 500 - (gameLevel.Level / 4 * 16);
                 gamePiece.Piece++;
             }
         }
